@@ -25,7 +25,7 @@ export const DetailTestResult = ({ user, onBack, onUpdateStatus }) => {
 
   return (
     <>
-      <div className="flex-1 bg-gray-50 p-6 overflow-auto">
+      <div className="flex-1 bg-gray-50 overflow-auto">
         {/* HEADER */}
         <div className="mb-6 space-y-4">
           {/* BARIS ATAS: JUDUL */}

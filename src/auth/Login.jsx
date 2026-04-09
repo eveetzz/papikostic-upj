@@ -156,7 +156,7 @@ export const Login = () => {
                 href="#"
                 onClick={() => navigate("/register")}
               >
-                Sign Up
+                Hubungi Admin
               </span>
             </p>
           </div>
