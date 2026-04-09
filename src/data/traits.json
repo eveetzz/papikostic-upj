@@ -1,0 +1,442 @@
+{
+  "A": {
+    "id": "A",
+    "category": "WORK DIRECTION",
+    "description": "Kebutuhan Berpretasi",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 5,
+        "text": "ketidakpastian tujuan, kepuasan dalam suatu pekerjaan, tidak ada usaha lebih"
+      },
+      {
+        "min": 6,
+        "max": 9,
+        "text": "tujuan jelas, kubutuhan sukses dan ambisi tinggi"
+      }
+    ]
+  },
+  "B": {
+    "id": "B",
+    "category": "SOCIAL NATURE",
+    "description": "kebutuhan berkelompok",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 3,
+        "text": "selektif"
+      },
+      {
+        "min": 4,
+        "max": 5,
+        "text": "butuh diterima, tapi tidak mudah dipengaruhi kelompok"
+      },
+      {
+        "min": 6,
+        "max": 9,
+        "text": "butuh disukai dan diakui, mudah dipengaruhi"
+      }
+    ]
+  },
+  "C": {
+    "id": "C",
+    "category": "WORK STYLE",
+    "description": "tipe organisator",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 2,
+        "text": "fleksibel tidak teratur"
+      },
+      {
+        "min": 3,
+        "max": 5,
+        "text": "teratur tetapi tidak tergolong fleksibel"
+      },
+      {
+        "min": 6,
+        "max": 9,
+        "text": "keteraturan tinggi cenderung kaku"
+      }
+    ]
+  },
+  "D": {
+    "id": "D",
+    "category": "WORK STYLE",
+    "description": "minat bekerja secara detil",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 3,
+        "text": "menyadari kebutuhan akan kecermatan, tetapi tidak berminat bekerja \ndetail"
+      },
+      {
+        "min": 4,
+        "max": 9,
+        "text": "minat tinggi untuk bekerja secara detail"
+      }
+    ]
+  },
+  "E": {
+    "id": "E",
+    "category": "TEMPERAMENT",
+    "description": "pengendalian emosi",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 1,
+        "text": "terbuka, cepat bereaksi, tidak normative"
+      },
+      {
+        "min": 2,
+        "max": 3,
+        "text": "terbuka"
+      },
+      {
+        "min": 4,
+        "max": 6,
+        "text": "punya pendekatan emosional seimbang, mampu mengendalikan"
+      },
+      {
+        "min": 7,
+        "max": 9,
+        "text": "sangat normative, kebutuhan pengendalian diri yang berlebihan"
+      }
+    ]
+  },
+  "F": {
+    "id": "F",
+    "category": "FOLLOWERSHIP",
+    "description": "Kebutuhan untuk mendukung atasan",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 1,
+        "text": "cenderung egois, kemungkinan bisa memberontak"
+      },
+      {
+        "min": 2,
+        "max": 3,
+        "text": "mengurus kepentingan sendiri"
+      },
+      {
+        "min": 4,
+        "max": 5,
+        "text": "setia terhadap perusahaan"
+      },
+      {
+        "min": 6,
+        "max": 9,
+        "text": "bersikap setia dan membantu, kemungkinan bantuannya bersifat politis"
+      }
+    ]
+  },
+  "G": {
+    "id": "G",
+    "category": "WORK DIRECTION",
+    "description": "Intensitas Kerja",
+    "interpretations": [
+      {
+        "min": 3,
+        "max": 4,
+        "text": "bekerja untuk kesenangan saja, bukan hasil optimal"
+      },
+      {
+        "min": 5,
+        "max": 7,
+        "text": "kemauan bekerja keras tinggi"
+      }
+    ]
+  },
+  "I": {
+    "id": "I",
+    "category": "LEADERSHIP",
+    "description": "Pengambilan keputusan",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 2,
+        "text": "ragu menolak mengambil keputusan"
+      },
+      {
+        "min": 3,
+        "max": 4,
+        "text": "berhati hati membuat keputusan"
+      },
+      {
+        "min": 5,
+        "max": 7,
+        "text": "berhati hati lancar dan mudah mengambil keputusan"
+      },
+      {
+        "min": 8,
+        "max": 9,
+        "text": "tidak ragu dalam mengambil keputusan"
+      }
+    ]
+  },
+  "K": {
+    "id": "K",
+    "category": "TEMPERAMENT",
+    "description": "kebutuhan untuk memimpin",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 2,
+        "text": "menhindari masalah, menulak, untuk mengenali situasi sebagai masalah"
+      },
+      {
+        "min": 3,
+        "max": 4,
+        "text": "suka lingkungan tanang, menghindari konflik"
+      },
+      {
+        "min": 5,
+        "max": 5,
+        "text": "keras kepala"
+      },
+      {
+        "min": 6,
+        "max": 7,
+        "text": "agresi berhubungan dengan kerja, dorongan semangat bersaing"
+      },
+      {
+        "min": 8,
+        "max": 9,
+        "text": "agresif, cendering defensive"
+      }
+    ]
+  },
+  "L": {
+    "id": "L",
+    "category": "LEADERSHIP",
+    "description": "peran kepemimpinan ",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 4,
+        "text": "cendurung tidak secara aktif menggunakan orang lain dalam bekerja"
+      },
+      {
+        "min": 5,
+        "max": 9,
+        "text": "yaitu tingkat dimana seseorang memproyeksikan dirinya sebagai pemimpin suatu tingkat dimana ia mencoba menggunakan orang lain untuk mencapai tujuannya"
+      }
+    ]
+  },
+  "N": {
+    "id": "N",
+    "category": "WORK DIRECTION",
+    "description": " kebutuhan menyelesaikan tugas",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 2,
+        "text": "menunda atau menghindari pekerjaan"
+      },
+      {
+        "min": 3,
+        "max": 4,
+        "text": "berhati hati atau ragu dalam bekerja"
+      },
+      {
+        "min": 4,
+        "max": 6,
+        "text": "cukup bertanggung jawab pada pekerjaan"
+      },
+      {
+        "min": 6,
+        "max": 9,
+        "text": "tekun, tanggung jawab tinggi"
+      }
+    ]
+  },
+  "O": {
+    "id": "O",
+    "category": "SOCIAL NATURE",
+    "description": "butuh keintiman dan kasih sayang",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 2,
+        "text": "tidak suka hubungan perorangan"
+      },
+      {
+        "min": 3,
+        "max": 4,
+        "text": "sadar akan hubungan perorangan, tapi tidak terlalu tergantung"
+      },
+      {
+        "min": 5,
+        "max": 9,
+        "text": "sangat tergantung, butuh penerimaan diri"
+      }
+    ]
+  },
+  "P": {
+    "id": "P",
+    "category": "LEADERSHIP",
+    "description": "kebutuhan mengendalikan orang lain",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 4,
+        "text": "menurunnya keinginan untuk bertanggung jawab pada pekerjaan dan tindakan orang lain"
+      },
+      {
+        "min": 5,
+        "max": 9,
+        "text": "tingkat kebutuhan untuk menerima tanggung jawab orang lain, menjadi orang yang bertanggung jawab"
+      }
+    ]
+  },
+  "R": {
+    "id": "R",
+    "category": "WORK STYLE",
+    "description": "tipe teoritis",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 4,
+        "text": "kurang perhatian, bersifat praktis"
+      },
+      {
+        "min": 5,
+        "max": 9,
+        "text": "nilai nilai penalaran tergolong tinggi"
+      }
+    ]
+  },
+  "S": {
+    "id": "S",
+    "category": "SOCIAL NATURE",
+    "description": "social extension",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 5,
+        "text": "perhatian rendah terhadap hubungan social, kurang percaya pada \norang lain"
+      },
+      {
+        "min": 6,
+        "max": 9,
+        "text": "kepercayaan tinggu dalam hubungan social, suka interaksi social"
+      }
+    ]
+  },
+  "T": {
+    "id": "T",
+    "category": "ACTIVITY",
+    "description": "pace",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 3,
+        "text": "melakukan segala sesuatu menurut kemauannya sendiri"
+      },
+      {
+        "min": 4,
+        "max": 6,
+        "text": "tergolong aktif secara internal dan mental"
+      }
+    ]
+  },
+  "V": {
+    "id": "V",
+    "category": "ACTIVITY",
+    "description": "Semangat",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 4,
+        "text": "cenderung pasif"
+      },
+      {
+        "min": 5,
+        "max": 7,
+        "text": "aktif secara fisik, cenderung sportif"
+      }
+    ]
+  },
+  "W": {
+    "id": "W",
+    "category": "FOLLOWERSHIP",
+    "description": "kebutuhan untuk mengatur dan mengawasi",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 3,
+        "text": "berorientasi pada tujuan, mandiri"
+      },
+      {
+        "min": 4,
+        "max": 5,
+        "text": "kebutuhan akan pengarahan dan harapan yang dirumuskan untuknya"
+      },
+      {
+        "min": 6,
+        "max": 9,
+        "text": "meningkatnya orientasi terhadap tugas dan membutuhkan instruksi yang jelas"
+      }
+    ]
+  },
+  "X": {
+    "id": "X",
+    "category": "SOCIAL NATURE",
+    "description": "Kebutuhan untuk menasehati",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 1,
+        "text": "cenderung pemalu"
+      },
+      {
+        "min": 2,
+        "max": 3,
+        "text": "rendah hati, tulus"
+      },
+      {
+        "min": 4,
+        "msx": 5,
+        "text": "memiliki pola perilaku yang unik"
+      },
+      {
+        "min": 6,
+        "max": 9,
+        "text": "membutuhkan perhatian nyata"
+      }
+    ]
+  },
+  "Z": {
+    "id": "Z",
+    "category": "TEMPERAMENT",
+    "description": "kebutuhan akan perubahan",
+    "interpretations": [
+      {
+        "min": 0,
+        "max": 2,
+        "text": "tidak suka berubah"
+      },
+      {
+        "min": 3,
+        "max": 4,
+        "text": "tidak suka perubahan jika dipaksakan"
+      },
+      {
+        "min": 5,
+        "max": 6,
+        "text": "mudah menyesuaikan diri"
+      },
+      {
+        "min": 6,
+        "max": 7,
+        "text": "membuat perubahan yang selektif , berfikir jauh kedepan"
+      },
+      {
+        "min": 8,
+        "max": 9,
+        "text": "mudah gelisah , frustasi , karena segala sesuatu tidak berjalan fantastis"
+      }
+    ]
+  }
+}

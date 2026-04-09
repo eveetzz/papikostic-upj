@@ -1,0 +1,4 @@
+[
+  { "min": 0, "max": 4, "label": "LOW ANALYSIS" },
+  { "min": 5, "max": 9, "label": "HIGH ANALYSIS" }
+]

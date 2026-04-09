@@ -1,0 +1,1262 @@
+[
+  {
+    "id": "Q1_A",
+    "number": 1,
+    "answer": "A",
+    "trait": "G",
+    "code": "G1"
+  },
+  {
+    "id": "Q1_B",
+    "number": 1,
+    "answer": "B",
+    "trait": "E",
+    "code": "E1"
+  },
+  {
+    "id": "Q2_A",
+    "number": 2,
+    "answer": "A",
+    "trait": "A",
+    "code": "A2"
+  },
+  {
+    "id": "Q2_B",
+    "number": 2,
+    "answer": "B",
+    "trait": "N",
+    "code": "N2"
+  },
+  {
+    "id": "Q3_A",
+    "number": 3,
+    "answer": "A",
+    "trait": "P",
+    "code": "P3"
+  },
+  {
+    "id": "Q3_B",
+    "number": 3,
+    "answer": "B",
+    "trait": "A",
+    "code": "A3"
+  },
+  {
+    "id": "Q4_A",
+    "number": 4,
+    "answer": "A",
+    "trait": "X",
+    "code": "X4"
+  },
+  {
+    "id": "Q4_B",
+    "number": 4,
+    "answer": "B",
+    "trait": "P",
+    "code": "P4"
+  },
+  {
+    "id": "Q5_A",
+    "number": 5,
+    "answer": "A",
+    "trait": "B",
+    "code": "B5"
+  },
+  {
+    "id": "Q5_B",
+    "number": 5,
+    "answer": "B",
+    "trait": "X",
+    "code": "X5"
+  },
+  {
+    "id": "Q6_A",
+    "number": 6,
+    "answer": "A",
+    "trait": "O",
+    "code": "O6"
+  },
+  {
+    "id": "Q6_B",
+    "number": 6,
+    "answer": "B",
+    "trait": "B",
+    "code": "B6"
+  },
+  {
+    "id": "Q7_A",
+    "number": 7,
+    "answer": "A",
+    "trait": "Z",
+    "code": "Z7"
+  },
+  {
+    "id": "Q7_B",
+    "number": 7,
+    "answer": "B",
+    "trait": "O",
+    "code": "O7"
+  },
+  {
+    "id": "Q8_A",
+    "number": 8,
+    "answer": "A",
+    "trait": "K",
+    "code": "K8"
+  },
+  {
+    "id": "Q8_B",
+    "number": 8,
+    "answer": "B",
+    "trait": "Z",
+    "code": "Z8"
+  },
+  {
+    "id": "Q9_A",
+    "number": 9,
+    "answer": "A",
+    "trait": "F",
+    "code": "F9"
+  },
+  {
+    "id": "Q9_B",
+    "number": 9,
+    "answer": "B",
+    "trait": "K",
+    "code": "K9"
+  },
+  {
+    "id": "Q10_A",
+    "number": 10,
+    "answer": "A",
+    "trait": "W",
+    "code": "W10"
+  },
+  {
+    "id": "Q10_B",
+    "number": 10,
+    "answer": "B",
+    "trait": "F",
+    "code": "F10"
+  },
+  {
+    "id": "Q11_A",
+    "number": 11,
+    "answer": "A",
+    "trait": "G",
+    "code": "G11"
+  },
+  {
+    "id": "Q11_B",
+    "number": 11,
+    "answer": "B",
+    "trait": "C",
+    "code": "C11"
+  },
+  {
+    "id": "Q12_A",
+    "number": 12,
+    "answer": "A",
+    "trait": "L",
+    "code": "L12"
+  },
+  {
+    "id": "Q12_B",
+    "number": 12,
+    "answer": "B",
+    "trait": "E",
+    "code": "E12"
+  },
+  {
+    "id": "Q13_A",
+    "number": 13,
+    "answer": "A",
+    "trait": "P",
+    "code": "P13"
+  },
+  {
+    "id": "Q13_B",
+    "number": 13,
+    "answer": "B",
+    "trait": "N",
+    "code": "N13"
+  },
+  {
+    "id": "Q14_A",
+    "number": 14,
+    "answer": "A",
+    "trait": "X",
+    "code": "X14"
+  },
+  {
+    "id": "Q14_B",
+    "number": 14,
+    "answer": "B",
+    "trait": "A",
+    "code": "A14"
+  },
+  {
+    "id": "Q15_A",
+    "number": 15,
+    "answer": "A",
+    "trait": "B",
+    "code": "B15"
+  },
+  {
+    "id": "Q15_B",
+    "number": 15,
+    "answer": "B",
+    "trait": "P",
+    "code": "P15"
+  },
+  {
+    "id": "Q16_A",
+    "number": 16,
+    "answer": "A",
+    "trait": "O",
+    "code": "O16"
+  },
+  {
+    "id": "Q16_B",
+    "number": 16,
+    "answer": "B",
+    "trait": "X",
+    "code": "X16"
+  },
+  {
+    "id": "Q17_A",
+    "number": 17,
+    "answer": "A",
+    "trait": "Z",
+    "code": "Z17"
+  },
+  {
+    "id": "Q17_B",
+    "number": 17,
+    "answer": "B",
+    "trait": "B",
+    "code": "B17"
+  },
+  {
+    "id": "Q18_A",
+    "number": 18,
+    "answer": "A",
+    "trait": "K",
+    "code": "K18"
+  },
+  {
+    "id": "Q18_B",
+    "number": 18,
+    "answer": "B",
+    "trait": "O",
+    "code": "O18"
+  },
+  {
+    "id": "Q19_A",
+    "number": 19,
+    "answer": "A",
+    "trait": "F",
+    "code": "F19"
+  },
+  {
+    "id": "Q19_B",
+    "number": 19,
+    "answer": "B",
+    "trait": "Z",
+    "code": "Z19"
+  },
+  {
+    "id": "Q20_A",
+    "number": 20,
+    "answer": "A",
+    "trait": "W",
+    "code": "W20"
+  },
+  {
+    "id": "Q20_B",
+    "number": 20,
+    "answer": "B",
+    "trait": "K",
+    "code": "K20"
+  },
+  {
+    "id": "Q21_A",
+    "number": 21,
+    "answer": "A",
+    "trait": "G",
+    "code": "G21"
+  },
+  {
+    "id": "Q21_B",
+    "number": 21,
+    "answer": "B",
+    "trait": "D",
+    "code": "D21"
+  },
+  {
+    "id": "Q22_A",
+    "number": 22,
+    "answer": "A",
+    "trait": "L",
+    "code": "L22"
+  },
+  {
+    "id": "Q22_B",
+    "number": 22,
+    "answer": "B",
+    "trait": "C",
+    "code": "C22"
+  },
+  {
+    "id": "Q23_A",
+    "number": 23,
+    "answer": "A",
+    "trait": "I",
+    "code": "I23"
+  },
+  {
+    "id": "Q23_B",
+    "number": 23,
+    "answer": "B",
+    "trait": "E",
+    "code": "E23"
+  },
+  {
+    "id": "Q24_A",
+    "number": 24,
+    "answer": "A",
+    "trait": "X",
+    "code": "X24"
+  },
+  {
+    "id": "Q24_B",
+    "number": 24,
+    "answer": "B",
+    "trait": "N",
+    "code": "N24"
+  },
+  {
+    "id": "Q25_A",
+    "number": 25,
+    "answer": "A",
+    "trait": "B",
+    "code": "B25"
+  },
+  {
+    "id": "Q25_B",
+    "number": 25,
+    "answer": "B",
+    "trait": "A",
+    "code": "A25"
+  },
+  {
+    "id": "Q26_A",
+    "number": 26,
+    "answer": "A",
+    "trait": "O",
+    "code": "O26"
+  },
+  {
+    "id": "Q26_B",
+    "number": 26,
+    "answer": "B",
+    "trait": "P",
+    "code": "P26"
+  },
+  {
+    "id": "Q27_A",
+    "number": 27,
+    "answer": "A",
+    "trait": "Z",
+    "code": "Z27"
+  },
+  {
+    "id": "Q27_B",
+    "number": 27,
+    "answer": "B",
+    "trait": "X",
+    "code": "X27"
+  },
+  {
+    "id": "Q28_A",
+    "number": 28,
+    "answer": "A",
+    "trait": "K",
+    "code": "K28"
+  },
+  {
+    "id": "Q28_B",
+    "number": 28,
+    "answer": "B",
+    "trait": "B",
+    "code": "B28"
+  },
+  {
+    "id": "Q29_A",
+    "number": 29,
+    "answer": "A",
+    "trait": "O",
+    "code": "O29"
+  },
+  {
+    "id": "Q29_B",
+    "number": 29,
+    "answer": "B",
+    "trait": "F",
+    "code": "F29"
+  },
+  {
+    "id": "Q30_A",
+    "number": 30,
+    "answer": "A",
+    "trait": "W",
+    "code": "W30"
+  },
+  {
+    "id": "Q30_B",
+    "number": 30,
+    "answer": "B",
+    "trait": "Z",
+    "code": "Z30"
+  },
+  {
+    "id": "Q31_A",
+    "number": 31,
+    "answer": "A",
+    "trait": "R",
+    "code": "R31"
+  },
+  {
+    "id": "Q31_B",
+    "number": 31,
+    "answer": "B",
+    "trait": "G",
+    "code": "G31"
+  },
+  {
+    "id": "Q32_A",
+    "number": 32,
+    "answer": "A",
+    "trait": "D",
+    "code": "D32"
+  },
+  {
+    "id": "Q32_B",
+    "number": 32,
+    "answer": "B",
+    "trait": "L",
+    "code": "L32"
+  },
+  {
+    "id": "Q33_A",
+    "number": 33,
+    "answer": "A",
+    "trait": "C",
+    "code": "C33"
+  },
+  {
+    "id": "Q33_B",
+    "number": 33,
+    "answer": "B",
+    "trait": "I",
+    "code": "I33"
+  },
+  {
+    "id": "Q34_A",
+    "number": 34,
+    "answer": "A",
+    "trait": "T",
+    "code": "T34"
+  },
+  {
+    "id": "Q34_B",
+    "number": 34,
+    "answer": "B",
+    "trait": "E",
+    "code": "E34"
+  },
+  {
+    "id": "Q35_A",
+    "number": 35,
+    "answer": "A",
+    "trait": "B",
+    "code": "B35"
+  },
+  {
+    "id": "Q35_B",
+    "number": 35,
+    "answer": "B",
+    "trait": "N",
+    "code": "N35"
+  },
+  {
+    "id": "Q36_A",
+    "number": 36,
+    "answer": "A",
+    "trait": "A",
+    "code": "A36"
+  },
+  {
+    "id": "Q36_B",
+    "number": 36,
+    "answer": "B",
+    "trait": "O",
+    "code": "O36"
+  },
+  {
+    "id": "Q37_A",
+    "number": 37,
+    "answer": "A",
+    "trait": "Z",
+    "code": "Z37"
+  },
+  {
+    "id": "Q37_B",
+    "number": 37,
+    "answer": "B",
+    "trait": "P",
+    "code": "P37"
+  },
+  {
+    "id": "Q38_A",
+    "number": 38,
+    "answer": "A",
+    "trait": "K",
+    "code": "K38"
+  },
+  {
+    "id": "Q38_B",
+    "number": 38,
+    "answer": "B",
+    "trait": "X",
+    "code": "X38"
+  },
+  {
+    "id": "Q39_A",
+    "number": 39,
+    "answer": "A",
+    "trait": "F",
+    "code": "F39"
+  },
+  {
+    "id": "Q39_B",
+    "number": 39,
+    "answer": "B",
+    "trait": "B",
+    "code": "B39"
+  },
+  {
+    "id": "Q40_A",
+    "number": 40,
+    "answer": "A",
+    "trait": "W",
+    "code": "W40"
+  },
+  {
+    "id": "Q40_B",
+    "number": 40,
+    "answer": "B",
+    "trait": "O",
+    "code": "O40"
+  },
+  {
+    "id": "Q41_A",
+    "number": 41,
+    "answer": "A",
+    "trait": "G",
+    "code": "G41"
+  },
+  {
+    "id": "Q41_B",
+    "number": 41,
+    "answer": "B",
+    "trait": "S",
+    "code": "S41"
+  },
+  {
+    "id": "Q42_A",
+    "number": 42,
+    "answer": "A",
+    "trait": "L",
+    "code": "L42"
+  },
+  {
+    "id": "Q42_B",
+    "number": 42,
+    "answer": "B",
+    "trait": "R",
+    "code": "R42"
+  },
+  {
+    "id": "Q43_A",
+    "number": 43,
+    "answer": "A",
+    "trait": "I",
+    "code": "I43"
+  },
+  {
+    "id": "Q43_B",
+    "number": 43,
+    "answer": "B",
+    "trait": "D",
+    "code": "D43"
+  },
+  {
+    "id": "Q44_A",
+    "number": 44,
+    "answer": "A",
+    "trait": "T",
+    "code": "T44"
+  },
+  {
+    "id": "Q44_B",
+    "number": 44,
+    "answer": "B",
+    "trait": "C",
+    "code": "C44"
+  },
+  {
+    "id": "Q45_A",
+    "number": 45,
+    "answer": "A",
+    "trait": "V",
+    "code": "V45"
+  },
+  {
+    "id": "Q45_B",
+    "number": 45,
+    "answer": "B",
+    "trait": "E",
+    "code": "E45"
+  },
+  {
+    "id": "Q46_A",
+    "number": 46,
+    "answer": "A",
+    "trait": "O",
+    "code": "O46"
+  },
+  {
+    "id": "Q46_B",
+    "number": 46,
+    "answer": "B",
+    "trait": "N",
+    "code": "N46"
+  },
+  {
+    "id": "Q47_A",
+    "number": 47,
+    "answer": "A",
+    "trait": "Z",
+    "code": "Z47"
+  },
+  {
+    "id": "Q47_B",
+    "number": 47,
+    "answer": "B",
+    "trait": "A",
+    "code": "A47"
+  },
+  {
+    "id": "Q48_A",
+    "number": 48,
+    "answer": "A",
+    "trait": "K",
+    "code": "K48"
+  },
+  {
+    "id": "Q48_B",
+    "number": 48,
+    "answer": "B",
+    "trait": "P",
+    "code": "P48"
+  },
+  {
+    "id": "Q49_A",
+    "number": 49,
+    "answer": "A",
+    "trait": "F",
+    "code": "F49"
+  },
+  {
+    "id": "Q49_B",
+    "number": 49,
+    "answer": "B",
+    "trait": "X",
+    "code": "X49"
+  },
+  {
+    "id": "Q50_A",
+    "number": 50,
+    "answer": "A",
+    "trait": "W",
+    "code": "W50"
+  },
+  {
+    "id": "Q50_B",
+    "number": 50,
+    "answer": "B",
+    "trait": "B",
+    "code": "B50"
+  },
+  {
+    "id": "Q51_A",
+    "number": 51,
+    "answer": "A",
+    "trait": "G",
+    "code": "G51"
+  },
+  {
+    "id": "Q51_B",
+    "number": 51,
+    "answer": "B",
+    "trait": "V",
+    "code": "V51"
+  },
+  {
+    "id": "Q52_A",
+    "number": 52,
+    "answer": "A",
+    "trait": "L",
+    "code": "L52"
+  },
+  {
+    "id": "Q52_B",
+    "number": 52,
+    "answer": "B",
+    "trait": "S",
+    "code": "S52"
+  },
+  {
+    "id": "Q53_A",
+    "number": 53,
+    "answer": "A",
+    "trait": "I",
+    "code": "I53"
+  },
+  {
+    "id": "Q53_B",
+    "number": 53,
+    "answer": "B",
+    "trait": "R",
+    "code": "R53"
+  },
+  {
+    "id": "Q54_A",
+    "number": 54,
+    "answer": "A",
+    "trait": "T",
+    "code": "T54"
+  },
+  {
+    "id": "Q54_B",
+    "number": 54,
+    "answer": "B",
+    "trait": "D",
+    "code": "D54"
+  },
+  {
+    "id": "Q55_A",
+    "number": 55,
+    "answer": "A",
+    "trait": "V",
+    "code": "V55"
+  },
+  {
+    "id": "Q55_B",
+    "number": 55,
+    "answer": "B",
+    "trait": "C",
+    "code": "C55"
+  },
+  {
+    "id": "Q56_A",
+    "number": 56,
+    "answer": "A",
+    "trait": "S",
+    "code": "S56"
+  },
+  {
+    "id": "Q56_B",
+    "number": 56,
+    "answer": "B",
+    "trait": "E",
+    "code": "E56"
+  },
+  {
+    "id": "Q57_A",
+    "number": 57,
+    "answer": "A",
+    "trait": "Z",
+    "code": "Z57"
+  },
+  {
+    "id": "Q57_B",
+    "number": 57,
+    "answer": "B",
+    "trait": "N",
+    "code": "N57"
+  },
+  {
+    "id": "Q58_A",
+    "number": 58,
+    "answer": "A",
+    "trait": "A",
+    "code": "A58"
+  },
+  {
+    "id": "Q58_B",
+    "number": 58,
+    "answer": "B",
+    "trait": "K",
+    "code": "K58"
+  },
+  {
+    "id": "Q59_A",
+    "number": 59,
+    "answer": "A",
+    "trait": "F",
+    "code": "F59"
+  },
+  {
+    "id": "Q59_B",
+    "number": 59,
+    "answer": "B",
+    "trait": "P",
+    "code": "P59"
+  },
+  {
+    "id": "Q60_A",
+    "number": 60,
+    "answer": "A",
+    "trait": "W",
+    "code": "W60"
+  },
+  {
+    "id": "Q60_B",
+    "number": 60,
+    "answer": "B",
+    "trait": "X",
+    "code": "X60"
+  },
+  {
+    "id": "Q61_A",
+    "number": 61,
+    "answer": "A",
+    "trait": "G",
+    "code": "G61"
+  },
+  {
+    "id": "Q61_B",
+    "number": 61,
+    "answer": "B",
+    "trait": "T",
+    "code": "T61"
+  },
+  {
+    "id": "Q62_A",
+    "number": 62,
+    "answer": "A",
+    "trait": "L",
+    "code": "L62"
+  },
+  {
+    "id": "Q62_B",
+    "number": 62,
+    "answer": "B",
+    "trait": "V",
+    "code": "V62"
+  },
+  {
+    "id": "Q63_A",
+    "number": 63,
+    "answer": "A",
+    "trait": "I",
+    "code": "I63"
+  },
+  {
+    "id": "Q63_B",
+    "number": 63,
+    "answer": "B",
+    "trait": "S",
+    "code": "S63"
+  },
+  {
+    "id": "Q64_A",
+    "number": 64,
+    "answer": "A",
+    "trait": "T",
+    "code": "T64"
+  },
+  {
+    "id": "Q64_B",
+    "number": 64,
+    "answer": "B",
+    "trait": "R",
+    "code": "R64"
+  },
+  {
+    "id": "Q65_A",
+    "number": 65,
+    "answer": "A",
+    "trait": "V",
+    "code": "V65"
+  },
+  {
+    "id": "Q65_B",
+    "number": 65,
+    "answer": "B",
+    "trait": "D",
+    "code": "D65"
+  },
+  {
+    "id": "Q66_A",
+    "number": 66,
+    "answer": "A",
+    "trait": "S",
+    "code": "S66"
+  },
+  {
+    "id": "Q66_B",
+    "number": 66,
+    "answer": "B",
+    "trait": "C",
+    "code": "C66"
+  },
+  {
+    "id": "Q67_A",
+    "number": 67,
+    "answer": "A",
+    "trait": "R",
+    "code": "R67"
+  },
+  {
+    "id": "Q67_B",
+    "number": 67,
+    "answer": "B",
+    "trait": "E",
+    "code": "E67"
+  },
+  {
+    "id": "Q68_A",
+    "number": 68,
+    "answer": "A",
+    "trait": "K",
+    "code": "K68"
+  },
+  {
+    "id": "Q68_B",
+    "number": 68,
+    "answer": "B",
+    "trait": "N",
+    "code": "N68"
+  },
+  {
+    "id": "Q69_A",
+    "number": 69,
+    "answer": "A",
+    "trait": "A",
+    "code": "A69"
+  },
+  {
+    "id": "Q69_B",
+    "number": 69,
+    "answer": "B",
+    "trait": "F",
+    "code": "F69"
+  },
+  {
+    "id": "Q70_A",
+    "number": 70,
+    "answer": "A",
+    "trait": "W",
+    "code": "W70"
+  },
+  {
+    "id": "Q70_B",
+    "number": 70,
+    "answer": "B",
+    "trait": "P",
+    "code": "P70"
+  },
+  {
+    "id": "Q71_A",
+    "number": 71,
+    "answer": "A",
+    "trait": "G",
+    "code": "G71"
+  },
+  {
+    "id": "Q71_B",
+    "number": 71,
+    "answer": "B",
+    "trait": "I",
+    "code": "I71"
+  },
+  {
+    "id": "Q72_A",
+    "number": 72,
+    "answer": "A",
+    "trait": "L",
+    "code": "L72"
+  },
+  {
+    "id": "Q72_B",
+    "number": 72,
+    "answer": "B",
+    "trait": "T",
+    "code": "T72"
+  },
+  {
+    "id": "Q73_A",
+    "number": 73,
+    "answer": "A",
+    "trait": "I",
+    "code": "I73"
+  },
+  {
+    "id": "Q73_B",
+    "number": 73,
+    "answer": "B",
+    "trait": "V",
+    "code": "V73"
+  },
+  {
+    "id": "Q74_A",
+    "number": 74,
+    "answer": "A",
+    "trait": "T",
+    "code": "T74"
+  },
+  {
+    "id": "Q74_B",
+    "number": 74,
+    "answer": "B",
+    "trait": "S",
+    "code": "S74"
+  },
+  {
+    "id": "Q75_A",
+    "number": 75,
+    "answer": "A",
+    "trait": "V",
+    "code": "V75"
+  },
+  {
+    "id": "Q75_B",
+    "number": 75,
+    "answer": "B",
+    "trait": "R",
+    "code": "R75"
+  },
+  {
+    "id": "Q76_A",
+    "number": 76,
+    "answer": "A",
+    "trait": "S",
+    "code": "S76"
+  },
+  {
+    "id": "Q76_B",
+    "number": 76,
+    "answer": "B",
+    "trait": "D",
+    "code": "D76"
+  },
+  {
+    "id": "Q77_A",
+    "number": 77,
+    "answer": "A",
+    "trait": "R",
+    "code": "R77"
+  },
+  {
+    "id": "Q77_B",
+    "number": 77,
+    "answer": "B",
+    "trait": "C",
+    "code": "C77"
+  },
+  {
+    "id": "Q78_A",
+    "number": 78,
+    "answer": "A",
+    "trait": "E",
+    "code": "E78"
+  },
+  {
+    "id": "Q78_B",
+    "number": 78,
+    "answer": "B",
+    "trait": "D",
+    "code": "D78"
+  },
+  {
+    "id": "Q79_A",
+    "number": 79,
+    "answer": "A",
+    "trait": "F",
+    "code": "F79"
+  },
+  {
+    "id": "Q79_B",
+    "number": 79,
+    "answer": "B",
+    "trait": "N",
+    "code": "N79"
+  },
+  {
+    "id": "Q80_A",
+    "number": 80,
+    "answer": "A",
+    "trait": "W",
+    "code": "W80"
+  },
+  {
+    "id": "Q80_B",
+    "number": 80,
+    "answer": "B",
+    "trait": "A",
+    "code": "A80"
+  },
+  {
+    "id": "Q81_A_1",
+    "number": 81,
+    "answer": "A",
+    "trait": "G",
+    "code": "G81"
+  },
+  {
+    "id": "Q81_A_2",
+    "number": 81,
+    "answer": "A",
+    "trait": "L",
+    "code": "L81"
+  },
+  {
+    "id": "Q82_A",
+    "number": 82,
+    "answer": "A",
+    "trait": "L",
+    "code": "L82"
+  },
+  {
+    "id": "Q82_B",
+    "number": 82,
+    "answer": "B",
+    "trait": "I",
+    "code": "I82"
+  },
+  {
+    "id": "Q83_A",
+    "number": 83,
+    "answer": "A",
+    "trait": "T",
+    "code": "T83"
+  },
+  {
+    "id": "Q83_B",
+    "number": 83,
+    "answer": "B",
+    "trait": "I",
+    "code": "I83"
+  },
+  {
+    "id": "Q84_A",
+    "number": 84,
+    "answer": "A",
+    "trait": "V",
+    "code": "V84"
+  },
+  {
+    "id": "Q84_B",
+    "number": 84,
+    "answer": "B",
+    "trait": "T",
+    "code": "T84"
+  },
+  {
+    "id": "Q85_A",
+    "number": 85,
+    "answer": "A",
+    "trait": "V",
+    "code": "V85"
+  },
+  {
+    "id": "Q85_B",
+    "number": 85,
+    "answer": "B",
+    "trait": "S",
+    "code": "S85"
+  },
+  {
+    "id": "Q86_A",
+    "number": 86,
+    "answer": "A",
+    "trait": "S",
+    "code": "S86"
+  },
+  {
+    "id": "Q86_B",
+    "number": 86,
+    "answer": "B",
+    "trait": "R",
+    "code": "R86"
+  },
+  {
+    "id": "Q87_A",
+    "number": 87,
+    "answer": "A",
+    "trait": "D",
+    "code": "D87"
+  },
+  {
+    "id": "Q87_B",
+    "number": 87,
+    "answer": "B",
+    "trait": "R",
+    "code": "R87"
+  },
+  {
+    "id": "Q88_A",
+    "number": 88,
+    "answer": "A",
+    "trait": "D",
+    "code": "D88"
+  },
+  {
+    "id": "Q88_B",
+    "number": 88,
+    "answer": "B",
+    "trait": "C",
+    "code": "C88"
+  },
+  {
+    "id": "Q89_A",
+    "number": 89,
+    "answer": "A",
+    "trait": "C",
+    "code": "C89"
+  },
+  {
+    "id": "Q89_B",
+    "number": 89,
+    "answer": "B",
+    "trait": "E",
+    "code": "E89"
+  },
+  {
+    "id": "Q90_A",
+    "number": 90,
+    "answer": "A",
+    "trait": "N",
+    "code": "N90"
+  },
+  {
+    "id": "Q90_B",
+    "number": 90,
+    "answer": "B",
+    "trait": "W",
+    "code": "W90"
+  }
+]
