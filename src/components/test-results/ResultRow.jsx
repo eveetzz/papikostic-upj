@@ -46,7 +46,10 @@ export const ResultRow = ({
 
   return (
     <>
-      <tr key={item.no} className="border-b border-gray-200 hover:bg-gray-50 transition">
+      <tr
+        key={item.no}
+        className="border-b border-gray-200 hover:bg-gray-50 transition"
+      >
         {/* Checkbox Selection - Mengikuti desain Kode 1 (Custom Checkbox) */}
         {isSelectionMode && (
           <td className="px-4 py-3 text-sm">
@@ -62,7 +65,7 @@ export const ResultRow = ({
         )}
 
         {/* No, Email, & Nama */}
-        <td className="px-4 py-3 text-sm">{index + 1}</td>
+        <td className="px-4 py-3 text-sm">{index}</td>
         <td className="px-4 py-3 text-sm">{item.displayName}</td>
         <td className="px-4 py-3 text-sm">{item.email}</td>
 
@@ -129,7 +132,7 @@ export const ResultRow = ({
                     : "bg-red-500 text-white border-red-200"
                 }`}
               >
-                {item.hasReviewed ? "● Reviewed" : "○ Pending"}
+                {item.hasReviewed ? "Reviewed" : "Pending"}
               </span>
             </div>
           </div>

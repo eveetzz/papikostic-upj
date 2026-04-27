@@ -133,3 +133,14 @@ export const startExam = async (user, now, deadline) => {
     console.error("Error starting exam:", error);
   }
 };
+
+export const getDisplayReport = (results) => {
+  return results.reduce((acc, item) => {
+    const category = item.category || "Lainnya";
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(item);
+    return acc;
+  }, {});
+};

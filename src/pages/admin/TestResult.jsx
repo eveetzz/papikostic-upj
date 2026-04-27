@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import { Search, Download, MoreVertical, ArrowUpDown } from "lucide-react";
+import {
+  Search,
+  Download,
+  MoreVertical,
+  ArrowUpDown,
+  Scale,
+} from "lucide-react";
 import {
   getUserResults,
   getUsers,
@@ -10,6 +16,10 @@ import { Pagination } from "../../components/Pagination";
 import { DetailTestResult } from "./DetailTestResult";
 import { getCategory } from "../../services/getUserResults";
 import { CompareModal } from "../../components/test-results/CompareModal";
+import { PreviewPDF } from "../../components/export/PreviewPDF";
+import { UserReportPDF } from "../../components/export/UserReportPDF";
+import { submitDate } from "../../utils/formatDate";
+import { getDisplayReport } from "../../services/fetchData";
 
 export const TestResult = () => {
   const [results, setResults] = useState([]);
@@ -35,6 +45,9 @@ export const TestResult = () => {
   // State untuk Fitur Komparasi
   const [isSelectionMode, setIsSelectionMode] = useState(false);
   const [selectedUsers, setSelectedUsers] = useState([]);
+
+  // fitur export PDF
+  const [openPDF, setOpenPDF] = useState(false);
 
   // Mock Categories (Bisa diambil dari DB juga kalo ada master datanya)
   const categories = useMemo(() => {
@@ -110,6 +123,35 @@ export const TestResult = () => {
     return matchSearch && matchStatus;
   });
 
+  const paginatedData = useMemo(() => {
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = startIndex + rowsPerPage;
+    return filteredData.slice(startIndex, endIndex);
+  }, [filteredData, currentPage, rowsPerPage]);
+
+  // logic export user ke PDF
+  const userToExport = useMemo(() => {
+    if (selectedDetailUser) return selectedDetailUser;
+
+    if (selectedUsers.length > 0) {
+      return combinedData.find(
+        (u) => u.uid === selectedUsers[0] || u.id === selectedUsers[0],
+      );
+    }
+
+    return null;
+  }, [selectedDetailUser, selectedUsers, combinedData]);
+
+  const displayReportPerUser = useMemo(() => {
+    if (!userToExport) return {};
+
+    // 1. Ambil semua hasil yang hanya milik user ini
+    const userResults = results.filter((r) => r.uid === userToExport.uid);
+
+    // 2. Baru di-reduce untuk dikelompokkan berdasarkan kategori
+    return getDisplayReport(userResults);
+  }, [results, userToExport]);
+
   // --- LOGIC KOMPARASI ---
   const toggleSelectionMode = () => {
     setIsSelectionMode(!isSelectionMode);
@@ -167,7 +209,6 @@ export const TestResult = () => {
     };
   }, []);
 
-  // Di dalam DummyPage component, sebelum return
   const dataToCompare = useMemo(() => {
     return combinedData.filter(
       (users) =>
@@ -283,48 +324,50 @@ export const TestResult = () => {
                 disabled={selectedUsers.length < 2}
                 onClick={() => setShowCompareModal(true)} // <--- TRIGGER MODAL
                 className={`px-4 py-2 rounded-md flex items-center justify-center gap-2 transition
-    ${
-      selectedUsers.length < 2
-        ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-        : "bg-green-600 text-white hover:bg-green-700 shadow-lg transform active:scale-95"
-    }`}
+              ${
+                selectedUsers.length < 2
+                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                  : "bg-green-600 text-white hover:bg-green-700 shadow-lg transform active:scale-95"
+              }`}
               >
-                <Download className="w-4 h-4" /> {/* Boleh ganti icon Trophy */}
+                <Scale className="w-4 h-4" /> {/* Boleh ganti icon Trophy */}
                 Compare User ({selectedUsers.length})
               </button>
 
-              {/* <button
-            disabled={selectedUsers.length < 2}
-            className={`px-4 py-2 rounded-md flex items-center justify-center gap-2 transition
-    ${
-      selectedUsers.length < 2
-        ? "bg-gray-100 text-gray cursor-not-allowed"
-        : "bg-green-600 text-white hover:bg-green-700"
-    }`}
-          >
-            <Download className="w-4 h-4" />
-            Compare User ({selectedUsers.length})
-          </button> */}
-
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-md w-full sm:w-auto flex items-center justify-center gap-2">
+              <button
+                onClick={() => setOpenPDF(true)}
+                disabled={selectedUsers.length < 1}
+                className={`px-4 py-2 rounded-md w-full sm:w-auto flex items-center justify-center gap-2 ${
+                  selectedUsers.length < 1
+                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                    : "bg-blue-600 text-white hover:bg-blue-700 shadow-lg transform active:scale-95"
+                }`}
+              >
                 <Download className="w-4 h-4" />
                 Export
               </button>
+
+              <PreviewPDF isOpen={openPDF} onClose={() => setOpenPDF(false)}>
+                <UserReportPDF
+                  user={userToExport}
+                  displayReport={displayReportPerUser}
+                />
+              </PreviewPDF>
             </div>
           </div>
 
           {/* TABLE */}
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full table-auto border-collapse">
                 <thead>
                   <tr className="bg-[#1e5a9e] text-white">
                     {isSelectionMode && (
-                      <th className="px-4 py-3 text-left text-sm font-semibold">
-                        Select
+                      <th className="w-12 px-4 py-3 text-left text-sm font-semibold">
+                        {/* Checkbox Master */}
                       </th>
                     )}
-                    <th className="px-4 py-3 text-left text-sm font-semibold">
+                    <th className="w-16 px-4 py-3 text-left text-sm font-semibold">
                       No
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">
@@ -333,41 +376,47 @@ export const TestResult = () => {
                     <th className="px-4 py-3 text-left text-sm font-semibold">
                       Email
                     </th>
-                    <th className="w-px px-4 py-3 text-left text-sm font-semibold">
+                    {/* Gunakan whitespace-nowrap agar judul tidak turun ke bawah (wrap) */}
+                    <th className="w-32 px-4 py-3 text-left text-sm font-semibold whitespace-nowrap">
                       Hasil Tes
                     </th>
-                    <th className="w-px px-4 py-3 text-left text-sm font-semibold ">
+                    <th className="w-48 px-4 py-3 text-left text-sm font-semibold whitespace-nowrap">
                       <button
                         onClick={handleSortDate}
                         className="flex items-center gap-2 hover:text-gray-200"
                       >
-                        Tanggal Pengerjaan <ArrowUpDown className="w-4 h-4" />
+                        Tanggal <ArrowUpDown className="w-4 h-4" />
                       </button>
                     </th>
-                    <th className="px-4 py-3 text-center text-sm font-semibold">
+                    <th className="w-24 px-4 py-3 text-center text-sm font-semibold">
                       Aksi
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredData.map((item, index) => (
-                    <ResultRow
-                      key={item.id}
-                      item={item}
-                      index={index}
-                      filterCategory={filterCategory}
-                      isSelectionMode={isSelectionMode}
-                      isSelected={selectedUsers.includes(item.id)}
-                      onSelect={() => handleSelectUser(item.id)}
-                      onView={() => {
-                        setSelectedDetailUser(item);
-                      }}
-                      // buat ganti status review
-                      onStatusChange={handleUpdateStatus}
-                    />
-                  ))}
+                  {paginatedData.map((item, index) => {
+                    const globalIndex =
+                      (currentPage - 1) * rowsPerPage + index + 1;
 
-                  {filteredData.length === 0 && (
+                    return (
+                      <ResultRow
+                        key={item.id}
+                        item={item}
+                        index={globalIndex}
+                        filterCategory={filterCategory}
+                        isSelectionMode={isSelectionMode}
+                        isSelected={selectedUsers.includes(item.id)}
+                        onSelect={() => handleSelectUser(item.id)}
+                        onView={() => {
+                          setSelectedDetailUser(item);
+                        }}
+                        // buat ganti status review
+                        onStatusChange={handleUpdateStatus}
+                      />
+                    );
+                  })}
+
+                  {paginatedData.length === 0 && (
                     <tr>
                       <td colSpan="7" className="p-8 text-center text-gray-500">
                         Data tidak ditemukan.

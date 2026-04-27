@@ -3,25 +3,29 @@ import { ArrowLeft, Download } from "lucide-react";
 import { submitDate } from "../../utils/formatDate";
 import { ScoreRadar } from "../../components/test-results/ScoreRadar";
 import { getUsers, updateStatusReview } from "../../services/manageUser";
+import { PDFViewer } from "@react-pdf/renderer";
+import { PreviewPDF } from "../../components/export/PreviewPDF";
+import { UserReportPDF } from "../../components/export/UserReportPDF";
+import { getDisplayReport } from "../../services/fetchData";
 
 export const DetailTestResult = ({ user, onBack, onUpdateStatus }) => {
+  const [loading, setLoading] = useState(true);
+  const [openPDF, setOpenPDF] = useState(false);
+
   const results = user.report || [];
 
-  const displayReport = results.reduce((acc, item) => {
-    const category = item.category || "Lainnya";
-    if (!acc[category]) {
-      acc[category] = [];
-    }
-    acc[category].push(item);
-    return acc;
-  }, {});
+  const report = getDisplayReport(results)
+
+  // const displayReport = results.reduce((acc, item) => {
+  //   const category = item.category || "Lainnya";
+  //   if (!acc[category]) {
+  //     acc[category] = [];
+  //   }
+  //   acc[category].push(item);
+  //   return acc;
+  // }, {});
 
   const formattedDate = submitDate(user);
-
-  console.log("status: ", user.hasReviewed);
-  console.log("status: ", user.uid);
-  console.log("status: ", user.nama);
-  console.log("status: ", user.displayName);
 
   return (
     <>
@@ -71,10 +75,17 @@ export const DetailTestResult = ({ user, onBack, onUpdateStatus }) => {
                 </option>
               </select>
 
-              <button className="flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 w-full sm:w-auto">
-                <Download className="w-5 h-5" />
-                Download Spreadsheet
+              <button
+                onClick={() => setOpenPDF(true)}
+                className="flex text-sm font-medium items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 w-full sm:w-auto"
+              >
+                <Download className="w-6 h-5" />
+                Download PDF
               </button>
+
+              <PreviewPDF isOpen={openPDF} onClose={() => setOpenPDF(false)}>
+                <UserReportPDF user={user}/>
+              </PreviewPDF>
             </div>
           </div>
         </div>
@@ -157,7 +168,7 @@ export const DetailTestResult = ({ user, onBack, onUpdateStatus }) => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-2">
             {/* PANEL */}
-            {Object.entries(displayReport).map(([category, items], index) => (
+            {Object.entries(report).map(([category, items], index) => (
               <div
                 key={index}
                 className="border border-gray-300 rounded-2xl p-4"
