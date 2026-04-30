@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, Download } from "lucide-react";
 import { submitDate } from "../../utils/formatDate";
 import { ScoreRadar } from "../../components/test-results/ScoreRadar";
@@ -7,6 +7,7 @@ import { PDFViewer } from "@react-pdf/renderer";
 import { PreviewPDF } from "../../components/export/PreviewPDF";
 import { UserReportPDF } from "../../components/export/UserReportPDF";
 import { getDisplayReport } from "../../services/fetchData";
+import { toPng } from "html-to-image";
 
 export const DetailTestResult = ({ user, onBack, onUpdateStatus }) => {
   const [loading, setLoading] = useState(true);
@@ -14,18 +15,35 @@ export const DetailTestResult = ({ user, onBack, onUpdateStatus }) => {
 
   const results = user.report || [];
 
-  const report = getDisplayReport(results)
-
-  // const displayReport = results.reduce((acc, item) => {
-  //   const category = item.category || "Lainnya";
-  //   if (!acc[category]) {
-  //     acc[category] = [];
-  //   }
-  //   acc[category].push(item);
-  //   return acc;
-  // }, {});
+  const report = getDisplayReport(results);
 
   const formattedDate = submitDate(user);
+
+  const chartRef = useRef(null);
+  const [chartImage, setChartImage] = useState(null);
+
+  const handleExportWithChart = async (user) => {
+    // 1. Set user yang mau diekspor agar data masuk ke ScoreRadar tersembunyi
+
+    // 2. Beri jeda sedikit agar Recharts selesai rendering (animasi)
+    setTimeout(async () => {
+      if (chartRef.current) {
+        try {
+          const dataUrl = await toPng(chartRef.current, {
+            cacheBust: true,
+            filter: (node) => {
+              // Mengabaikan elemen <link> agar tidak diproses saat generate gambar
+              return node.tagName !== "LINK";
+            },
+          });
+          setChartImage(dataUrl); // Simpan Base64 ke state
+          setOpenPDF(true); // Buka Preview PDF
+        } catch (err) {
+          console.error("Gagal generate gambar chart:", err);
+        }
+      }
+    }, 1200);
+  };
 
   return (
     <>
@@ -76,7 +94,7 @@ export const DetailTestResult = ({ user, onBack, onUpdateStatus }) => {
               </select>
 
               <button
-                onClick={() => setOpenPDF(true)}
+                onClick={() => handleExportWithChart(user)}
                 className="flex text-sm font-medium items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 w-full sm:w-auto"
               >
                 <Download className="w-6 h-5" />
@@ -84,7 +102,7 @@ export const DetailTestResult = ({ user, onBack, onUpdateStatus }) => {
               </button>
 
               <PreviewPDF isOpen={openPDF} onClose={() => setOpenPDF(false)}>
-                <UserReportPDF user={user}/>
+                <UserReportPDF user={user} chartImage={chartImage} />
               </PreviewPDF>
             </div>
           </div>
@@ -173,26 +191,26 @@ export const DetailTestResult = ({ user, onBack, onUpdateStatus }) => {
                 key={index}
                 className="border border-gray-300 rounded-2xl p-4"
               >
-                <div className="bg-gray-100 rounded-t-xl text-center py-2 text-xl font-medium mb-4">
+                <div className="bg-[#e5f2ff] rounded-t-xl text-center py-2 text-xl font-semibold mb-4 text-[#1A5A9A]">
                   {category}
                 </div>
 
                 {items.map((item, index) => (
                   <div key={index} className="mb-6 p-2">
-                    <div className="flex justify-between mb-2 text-sm">
+                    <div className="flex justify-between mb-2 text-[15px] font-normal">
                       <span>{item.description}</span>
                       <span>{item.score}</span>
                     </div>
 
-                    <div className="h-2 bg-orange-200 rounded-full mb-2">
+                    <div className="h-2 bg-[#E5E7EB] rounded-full mb-2">
                       <div
-                        className="h-full bg-orange-500 rounded-full"
+                        className={`h-full rounded-full ${item.score > 4 ? " bg-[#0D9488]" : " bg-[#F59E0B]"}`}
                         style={{ width: `${(item.score / 9) * 100}%` }}
                       />
                     </div>
 
                     <span
-                      className={`inline-block px-4 py-1 border rounded-full text-sm ${item.label === "HIGH ANALYSIS" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}
+                      className={`inline-block p-1  text-sm font-medium ${item.label === "HIGH ANALYSIS" ? " text-[#0D9488]" : " text-[#F59E0B]"}`}
                     >
                       {item.label}
                     </span>
@@ -201,6 +219,15 @@ export const DetailTestResult = ({ user, onBack, onUpdateStatus }) => {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      <div style={{ position: "absolute", left: "-9999px", top: 0 }}>
+        <div
+          ref={chartRef}
+          style={{ width: "600px", height: "400px", background: "white" }}
+        >
+          <ScoreRadar results={results} />
         </div>
       </div>
     </>

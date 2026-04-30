@@ -20,6 +20,8 @@ import { PreviewPDF } from "../../components/export/PreviewPDF";
 import { UserReportPDF } from "../../components/export/UserReportPDF";
 import { submitDate } from "../../utils/formatDate";
 import { getDisplayReport } from "../../services/fetchData";
+import { ScoreRadar } from "../../components/test-results/ScoreRadar";
+import { toPng } from "html-to-image";
 
 export const TestResult = () => {
   const [results, setResults] = useState([]);
@@ -48,6 +50,12 @@ export const TestResult = () => {
 
   // fitur export PDF
   const [openPDF, setOpenPDF] = useState(false);
+
+  const chartRef = useRef(null);
+  const [chartImage, setChartImage] = useState(null);
+  const [dataForChart, setDataForChart] = useState([]);
+
+  const [userToProcessExport, setUserToProcessExport] = useState(null);
 
   // Mock Categories (Bisa diambil dari DB juga kalo ada master datanya)
   const categories = useMemo(() => {
@@ -142,15 +150,23 @@ export const TestResult = () => {
     return null;
   }, [selectedDetailUser, selectedUsers, combinedData]);
 
-  const displayReportPerUser = useMemo(() => {
-    if (!userToExport) return {};
+  // logic export chart ke PDF
+  const handleExportWithChart = async (user) => {
+    // Gunakan state baru, jangan setSelectedDetailUser(user)
+    setUserToProcessExport(user);
 
-    // 1. Ambil semua hasil yang hanya milik user ini
-    const userResults = results.filter((r) => r.uid === userToExport.uid);
-
-    // 2. Baru di-reduce untuk dikelompokkan berdasarkan kategori
-    return getDisplayReport(userResults);
-  }, [results, userToExport]);
+    setTimeout(async () => {
+      if (chartRef.current) {
+        try {
+          const dataUrl = await toPng(chartRef.current, { cacheBust: true });
+          setChartImage(dataUrl);
+          setOpenPDF(true);
+        } catch (err) {
+          console.error("Gagal generate gambar chart:", err);
+        }
+      }
+    }, 2000);
+  };
 
   // --- LOGIC KOMPARASI ---
   const toggleSelectionMode = () => {
@@ -243,202 +259,218 @@ export const TestResult = () => {
 
     return (
       <>
-        <>
-          {/* HEADER */}
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-2xl font-bold text-gray-800">Hasil Tes</h1>
+        {/* HEADER */}
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-bold text-gray-800">Hasil Tes</h1>
 
-            {/* Container Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setShowDropdown(!showDropdown)}
-                className={`p-2 rounded-full transition hover:bg-gray-200 ${
-                  showDropdown || isSelectionMode
-                    ? "bg-blue-100 text-blue-600"
-                    : "text-gray-600"
-                }`}
+          {/* Container Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setShowDropdown(!showDropdown)}
+              className={`p-2 rounded-full transition hover:bg-gray-200 ${
+                showDropdown || isSelectionMode
+                  ? "bg-blue-100 text-blue-600"
+                  : "text-gray-600"
+              }`}
+            >
+              <MoreVertical size={24} />
+            </button>
+
+            {/* Dropdown Menu */}
+            {showDropdown && (
+              <div
+                ref={dropdownRef} // Menghubungkan elemen ini dengan ref
+                className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border z-20 py-1"
               >
-                <MoreVertical size={24} />
-              </button>
-
-              {/* Dropdown Menu */}
-              {showDropdown && (
-                <div
-                  ref={dropdownRef} // Menghubungkan elemen ini dengan ref
-                  className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border z-20 py-1"
+                <button
+                  onClick={() => {
+                    toggleSelectionMode();
+                    setShowDropdown(false);
+                  }}
+                  className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 transition"
                 >
-                  <button
-                    onClick={() => {
-                      toggleSelectionMode();
-                      setShowDropdown(false);
-                    }}
-                    className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 transition"
-                  >
-                    {isSelectionMode ? "Kembali" : "Pilih User"}
-                  </button>
-                </div>
-              )}
-            </div>
+                  {isSelectionMode ? "Kembali" : "Pilih User"}
+                </button>
+              </div>
+            )}
           </div>
+        </div>
 
-          {/* Filter and Actions */}
-          <div className="bg-white rounded-lg shadow p-4 mb-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
-              <div className="flex-1">
-                <select
-                  value={filterCategory}
-                  onChange={(e) => setFilterCategory(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  {categories.map((cat) => (
-                    <option key={cat} value={cat}>
-                      {cat}
-                    </option>
-                  ))}
-                </select>
-              </div>
+        {/* Filter and Actions */}
+        <div className="bg-white rounded-lg shadow p-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+            <div className="flex-1">
+              <select
+                value={filterCategory}
+                onChange={(e) => setFilterCategory(e.target.value)}
+                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-              <div className="flex-1">
-                <select
-                  value={filterStatus}
-                  onChange={(e) => setFilterStatus(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="all">Semua</option>
-                  <option value="pending">Pending Review</option>
-                  <option value="success">Success Review</option>
-                </select>
-              </div>
+            <div className="flex-1">
+              <select
+                value={filterStatus}
+                onChange={(e) => setFilterStatus(e.target.value)}
+                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="all">Semua</option>
+                <option value="pending">Pending Review</option>
+                <option value="success">Success Review</option>
+              </select>
+            </div>
 
-              <div className="flex-1 relative">
-                <input
-                  type="text"
-                  placeholder="Cari"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
+            <div className="flex-1 relative">
+              <input
+                type="text"
+                placeholder="Cari"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
 
-              <button
-                disabled={selectedUsers.length < 2}
-                onClick={() => setShowCompareModal(true)} // <--- TRIGGER MODAL
-                className={`px-4 py-2 rounded-md flex items-center justify-center gap-2 transition
+            <button
+              disabled={selectedUsers.length < 2}
+              onClick={() => setShowCompareModal(true)} // <--- TRIGGER MODAL
+              className={`px-4 py-2 rounded-md flex items-center justify-center gap-2 transition
               ${
                 selectedUsers.length < 2
                   ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                   : "bg-green-600 text-white hover:bg-green-700 shadow-lg transform active:scale-95"
               }`}
-              >
-                <Scale className="w-4 h-4" /> {/* Boleh ganti icon Trophy */}
-                Compare User ({selectedUsers.length})
-              </button>
+            >
+              <Scale className="w-4 h-4" /> {/* Boleh ganti icon Trophy */}
+              Compare User ({selectedUsers.length})
+            </button>
 
-              <button
-                onClick={() => setOpenPDF(true)}
-                disabled={selectedUsers.length < 1}
-                className={`px-4 py-2 rounded-md w-full sm:w-auto flex items-center justify-center gap-2 ${
-                  selectedUsers.length < 1
-                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                    : "bg-blue-600 text-white hover:bg-blue-700 shadow-lg transform active:scale-95"
-                }`}
-              >
-                <Download className="w-4 h-4" />
-                Export
-              </button>
+            <button
+              onClick={() => handleExportWithChart(userToExport)}
+              disabled={selectedUsers.length < 1}
+              className={`px-4 py-2 rounded-md w-full sm:w-auto flex items-center justify-center gap-2 ${
+                selectedUsers.length < 1
+                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                  : "bg-blue-600 text-white hover:bg-blue-700 shadow-lg transform active:scale-95"
+              }`}
+            >
+              <Download className="w-4 h-4" />
+              Export
+            </button>
 
-              <PreviewPDF isOpen={openPDF} onClose={() => setOpenPDF(false)}>
-                <UserReportPDF
-                  user={userToExport}
-                  displayReport={displayReportPerUser}
-                />
-              </PreviewPDF>
-            </div>
+            <PreviewPDF
+              isOpen={openPDF}
+              onClose={() => {
+                setOpenPDF(false);
+                setUserToProcessExport(null);
+              }}
+            >
+              <UserReportPDF
+                user={userToProcessExport}
+                chartImage={chartImage}
+              />
+            </PreviewPDF>
           </div>
+        </div>
 
-          {/* TABLE */}
-          <div className="bg-white rounded-lg shadow overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full table-auto border-collapse">
-                <thead>
-                  <tr className="bg-[#1e5a9e] text-white">
-                    {isSelectionMode && (
-                      <th className="w-12 px-4 py-3 text-left text-sm font-semibold">
-                        {/* Checkbox Master */}
-                      </th>
-                    )}
-                    <th className="w-16 px-4 py-3 text-left text-sm font-semibold">
-                      No
+        {/* TABLE */}
+        <div className="bg-white rounded-lg shadow overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full table-auto border-collapse">
+              <thead>
+                <tr className="bg-[#1e5a9e] text-white">
+                  {isSelectionMode && (
+                    <th className="w-12 px-4 py-3 text-left text-sm font-semibold">
+                      {/* Checkbox Master */}
                     </th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Nama
-                    </th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold">
-                      Email
-                    </th>
-                    {/* Gunakan whitespace-nowrap agar judul tidak turun ke bawah (wrap) */}
-                    <th className="w-32 px-4 py-3 text-left text-sm font-semibold whitespace-nowrap">
-                      Hasil Tes
-                    </th>
-                    <th className="w-48 px-4 py-3 text-left text-sm font-semibold whitespace-nowrap">
-                      <button
-                        onClick={handleSortDate}
-                        className="flex items-center gap-2 hover:text-gray-200"
-                      >
-                        Tanggal <ArrowUpDown className="w-4 h-4" />
-                      </button>
-                    </th>
-                    <th className="w-24 px-4 py-3 text-center text-sm font-semibold">
-                      Aksi
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {paginatedData.map((item, index) => {
-                    const globalIndex =
-                      (currentPage - 1) * rowsPerPage + index + 1;
-
-                    return (
-                      <ResultRow
-                        key={item.id}
-                        item={item}
-                        index={globalIndex}
-                        filterCategory={filterCategory}
-                        isSelectionMode={isSelectionMode}
-                        isSelected={selectedUsers.includes(item.id)}
-                        onSelect={() => handleSelectUser(item.id)}
-                        onView={() => {
-                          setSelectedDetailUser(item);
-                        }}
-                        // buat ganti status review
-                        onStatusChange={handleUpdateStatus}
-                      />
-                    );
-                  })}
-
-                  {paginatedData.length === 0 && (
-                    <tr>
-                      <td colSpan="7" className="p-8 text-center text-gray-500">
-                        Data tidak ditemukan.
-                      </td>
-                    </tr>
                   )}
-                </tbody>
-              </table>
-            </div>
+                  <th className="w-16 px-4 py-3 text-left text-sm font-semibold">
+                    No
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-semibold">
+                    Nama
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-semibold">
+                    Email
+                  </th>
+                  {/* Gunakan whitespace-nowrap agar judul tidak turun ke bawah (wrap) */}
+                  <th className="w-32 px-4 py-3 text-left text-sm font-semibold whitespace-nowrap">
+                    Hasil Tes
+                  </th>
+                  <th className="w-48 px-4 py-3 text-left text-sm font-semibold whitespace-nowrap">
+                    <button
+                      onClick={handleSortDate}
+                      className="flex items-center gap-2 hover:text-gray-200"
+                    >
+                      Tanggal <ArrowUpDown className="w-4 h-4" />
+                    </button>
+                  </th>
+                  <th className="w-24 px-4 py-3 text-center text-sm font-semibold">
+                    Aksi
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {paginatedData.map((item, index) => {
+                  const globalIndex =
+                    (currentPage - 1) * rowsPerPage + index + 1;
 
-            {/* Pagination placeholder (sesuai gambar) */}
+                  return (
+                    <ResultRow
+                      key={item.id}
+                      item={item}
+                      index={globalIndex}
+                      filterCategory={filterCategory}
+                      isSelectionMode={isSelectionMode}
+                      isSelected={selectedUsers.includes(item.id)}
+                      onSelect={() => handleSelectUser(item.id)}
+                      onView={() => {
+                        setSelectedDetailUser(item);
+                      }}
+                      // buat ganti status review
+                      onStatusChange={handleUpdateStatus}
+                    />
+                  );
+                })}
 
-            <Pagination
-              rowsPerPage={rowsPerPage}
-              setRowsPerPage={setRowsPerPage}
-              setCurrentPage={setCurrentPage}
-              filteredUsers={filteredData}
-              currentPage={currentPage}
-              totalPages={totalPages}
-            />
+                {paginatedData.length === 0 && (
+                  <tr>
+                    <td colSpan="7" className="p-8 text-center text-gray-500">
+                      Data tidak ditemukan.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
-        </>
+
+          {/* Pagination placeholder (sesuai gambar) */}
+
+          <Pagination
+            rowsPerPage={rowsPerPage}
+            setRowsPerPage={setRowsPerPage}
+            setCurrentPage={setCurrentPage}
+            filteredUsers={filteredData}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
+        </div>
+
+        {/* Kontainer Gaib untuk Capture Chart */}
+        <div style={{ position: "absolute", left: "-9999px", top: 0 }}>
+          <div
+            ref={chartRef}
+            style={{ width: "600px", height: "400px", background: "white" }}
+          >
+            {userToProcessExport && (
+              <ScoreRadar results={userToProcessExport.report || []} />
+            )}
+          </div>
+        </div>
       </>
     );
   };

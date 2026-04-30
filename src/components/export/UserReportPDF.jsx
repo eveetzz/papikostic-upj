@@ -11,7 +11,7 @@ import logoImg from "../../assets/864.jpg";
 import { submitDate } from "../../utils/formatDate";
 import { getDisplayReport } from "../../services/fetchData";
 
-export const UserReportPDF = ({ user }) => {
+export const UserReportPDF = ({ user, chartImage }) => {
   const date = submitDate(user);
 
   const report = getDisplayReport(user.report);
@@ -28,12 +28,6 @@ export const UserReportPDF = ({ user }) => {
       flex: 0, // Biarkan konten ini mengambil ruang sesuai isinya
     },
 
-    // 1. Tambahkan style ini di StyleSheet
-    noteLine: {
-      borderBottom: "0.5pt solid #EEE",
-      marginTop: 20, // Jarak antar garis untuk tulisan tangan
-      width: "100%",
-    },
     // Tambahkan sedikit line height di biodata agar lebih enak dibaca
     bioText: {
       marginBottom: 4,
@@ -152,20 +146,28 @@ export const UserReportPDF = ({ user }) => {
 
     // interpretasi note section
     noteBox: {
-      border: "1pt solid #ccc",
-      borderRadius: 15,
-      padding: 10,
-      minHeight: 100,
-      flex: 1, // KUNCINYA DI SINI: Akan mengambil semua sisa ruang yang ada
-      marginBottom: 30, // Jarak ke footer
+      backgroundColor: "#F8FAFC", // Warna background yang sama dengan biodata
+      borderLeft: "4pt solid #1A5A9A", // Aksen Biru UPJ yang sama
+      borderTop: "1pt solid #E5E7EB",
+      borderRight: "1pt solid #E5E7EB",
+      borderBottom: "1pt solid #E5E7EB",
+      borderRadius: 4, // Gunakan radius kecil agar lebih tegas/profesional
+      padding: 15,
+      flex: 1,
+      marginBottom: 20,
     },
-
     noteTitle: {
-      fontSize: 9,
+      fontSize: 7,
       fontWeight: "bold",
-      color: "#666",
-      marginBottom: 5,
+      color: "#64748B", // Abu-abu yang sama dengan label biodata
+      marginBottom: 10,
       textTransform: "uppercase",
+      letterSpacing: 0.5,
+    },
+    noteLine: {
+      borderBottom: "0.5pt solid #CBD5E1", // Garis bantu tulis yang halus
+      marginTop: 20,
+      width: "100%",
     },
 
     sectionTitle: {
@@ -177,6 +179,60 @@ export const UserReportPDF = ({ user }) => {
       borderBottom: "1pt solid #1A5A9A",
       paddingBottom: 2,
       width: "100%",
+    },
+
+    signatureSection: {
+      marginTop: 20,
+      // Menarik seluruh kotak ke kanan bawah
+      marginLeft: "auto",
+      width: 200, // Lebar area tanda tangan (atur sesuai kebutuhan)
+      paddingRight: 20,
+      wrap: false,
+    },
+    dateText: {
+      fontSize: 10,
+      marginBottom: 5,
+      textAlign: "left", // Pepet kiri di dalam kotak
+    },
+    stampPlaceholder: {
+      height: 70,
+      width: "100%", // Memberikan ruang kosong yang pasti
+    },
+    psikologName: {
+      fontSize: 10,
+      fontWeight: "bold",
+      borderBottom: "1pt solid #000",
+      paddingBottom: 2,
+      marginBottom: 4,
+      textAlign: "left",
+      minHeight: 15, // Supaya kalau kosong, garis tetap ada
+    },
+    sippText: {
+      fontSize: 9,
+      borderBottom: "1pt solid #8B0000",
+      marginTop: 15,
+      marginLeft: 20,
+      paddingBottom: 2,
+      textAlign: "left",
+      minHeight: 12,
+    },
+
+    // BOX MERAH GELAP (Sesuai Gambar)
+    alertBox: {
+      backgroundColor: "#8B0000", // Merah Tua / Maroon
+      paddingVertical: 8,
+      paddingHorizontal: 15,
+      marginTop: 10,
+      marginBottom: 15,
+      width: "100%",
+    },
+    alertText: {
+      color: "#FFFFFF",
+      fontSize: 8,
+      fontWeight: "bold",
+      textAlign: "center",
+      textTransform: "uppercase",
+      letterSpacing: 0.5,
     },
 
     footer: {
@@ -206,32 +262,66 @@ export const UserReportPDF = ({ user }) => {
             <Text style={styles.institutionName}>
               Universitas Pembangunan Jaya
             </Text>
-            <Text style={styles.address}>Jl. Cendrawasih No. 1, Jakarta</Text>
+            <Text style={styles.address}>
+              Jalan Boulevard UPJ, Bintaro Jaya, Tangerang Selatan 15413
+            </Text>
           </View>
         </View>
 
         <View style={styles.multiColorBar}>
-          <View style={[styles.colorSegment, { backgroundColor: "#009245" }]} />{" "}
-          {/* Biru UPJ */}
-          <View
-            style={[styles.colorSegment, { backgroundColor: "#ED1C24" }]}
-          />{" "}
-          {/* Orange */}
-          <View
-            style={[styles.colorSegment, { backgroundColor: "#0071BC" }]}
-          />{" "}
-          {/* Toska */}
+          <View style={[styles.colorSegment, { backgroundColor: "#009245" }]} />
+          <View style={[styles.colorSegment, { backgroundColor: "#ED1C24" }]} />
+          <View style={[styles.colorSegment, { backgroundColor: "#0071BC" }]} />
         </View>
 
         {/* Biodata User */}
         <Text style={styles.sectionTitle}>I. INFORMASI PESERTA</Text>
-        <View style={styles.biodataSection}>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.bioText}>Nama: {user.displayName}</Text>
-            <Text style={styles.bioText}>Email: {user.email}</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            backgroundColor: "#F8FAFC",
+            padding: 12,
+            borderRadius: 8,
+            borderLeft: "4pt solid #1A5A9A", // Aksen warna UPJ
+            marginBottom: 20,
+          }}
+        >
+          <View style={{ flex: 1.5 }}>
+            <Text style={{ fontSize: 7, color: "#64748B", marginBottom: 2 }}>
+              NAMA PESERTA
+            </Text>
+            <Text
+              style={{ fontSize: 11, fontWeight: "bold", color: "#1E293B" }}
+            >
+              {user.displayName}
+            </Text>
+            <Text
+              style={{
+                fontSize: 7,
+                color: "#64748B",
+                marginTop: 8,
+                marginBottom: 2,
+              }}
+            >
+              EMAIL
+            </Text>
+            <Text style={{ fontSize: 10, color: "#1E293B" }}>{user.email}</Text>
           </View>
-          <View style={{ flex: 1, textAlign: "right" }}>
-            <Text style={styles.bioText}>Tanggal Pengerjaan: {date}</Text>
+          <View
+            style={{
+              flex: 1,
+              alignItems: "flex-end",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={{ fontSize: 7, color: "#64748B", marginBottom: 2 }}>
+              TANGGAL TES
+            </Text>
+            <Text
+              style={{ fontSize: 10, fontWeight: "bold", color: "#1E293B" }}
+            >
+              {date}
+            </Text>
           </View>
         </View>
 
@@ -266,7 +356,7 @@ export const UserReportPDF = ({ user }) => {
                           style={[
                             styles.barFill,
                             {
-                              width: `${(Math.max(0, Number(item.score) || 0) / 9) * 100}%`,
+                              width: `${(item.score / 9) * 100}%`,
                               backgroundColor: themeColor,
                             },
                           ]}
@@ -285,19 +375,54 @@ export const UserReportPDF = ({ user }) => {
           ))}
         </View>
 
+        <Text style={styles.sectionTitle}>III. PROFIL KOMPETENSI PSIKOLOGIS</Text>
+        {chartImage ? (
+          <Image
+            src={chartImage}
+            style={{
+              width: "100%",
+              height: "auto",
+              marginBottom: 20,
+            }}
+          />
+        ) : (
+          <Text>Tidak bisa memuat chart</Text>
+        )}
+
         {/* Interpretasi Note */}
-        <Text style={styles.sectionTitle}>III. INTERPRETASI & REKOMENDASI</Text>
+        <Text style={styles.sectionTitle}>IV. INTERPRETASI & REKOMENDASI</Text>
 
         <View style={styles.noteBox}>
-          <Text style={styles.noteTitle}>Catatan / Rekomendasi Pemeriksa:</Text>
-          {/* Biarkan kosong atau isi garis-garis tipis untuk ditulis tangan */}
+          {/* Label Header Box */}
+          <Text style={styles.noteTitle}>Catatan / Rekomendasi Pemeriksa</Text>
+        </View>
+
+        {/* --- AREA TANDA TANGAN --- */}
+        <View style={styles.signatureSection}>
+          {/* Baris Kota & Tanggal */}
+          <Text style={styles.dateText}>Tangerang Selatan, </Text>
+
+          {/* Kotak Kosong untuk TTD Manual / Stempel */}
+          <View style={styles.stampPlaceholder} />
+
+          {/* Baris Nama Terang */}
+          <Text style={styles.psikologName}>NAMA : </Text>
+
+          {/* Baris SIPP */}
+          <Text style={styles.sippText}>SIPP : </Text>
+        </View>
+
+        {/* --- BOX MERAH PERINGATAN (FULL WIDTH) --- */}
+        <View style={styles.alertBox}>
+          <Text style={styles.alertText}>
+            Profil Evaluasi Psikologis ini hanya berlaku bila telah
+            ditandatangani oleh Psikolog
+          </Text>
         </View>
 
         {/* 3. FOOTER PROFESIONAL (Fixed di bawah) */}
         <View style={styles.footer} fixed>
-          <Text>
-            Dokumen ini dihasilkan secara otomatis oleh Sistem Evaluasi UPJ
-          </Text>
+          <Text>PAPI KOSTICK UPJ</Text>
           <Text
             render={({ pageNumber, totalPages }) =>
               `Halaman ${pageNumber} dari ${totalPages}`
