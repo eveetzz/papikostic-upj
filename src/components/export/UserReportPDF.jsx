@@ -211,7 +211,6 @@ export const UserReportPDF = ({ user, chartImage }) => {
       fontSize: 9,
       borderBottom: "1pt solid #8B0000",
       marginTop: 15,
-      marginLeft: 20,
       paddingBottom: 2,
       textAlign: "left",
       minHeight: 12,
@@ -375,7 +374,9 @@ export const UserReportPDF = ({ user, chartImage }) => {
           ))}
         </View>
 
-        <Text style={styles.sectionTitle}>III. PROFIL KOMPETENSI PSIKOLOGIS</Text>
+        <Text style={styles.sectionTitle}>
+          III. PROFIL KOMPETENSI PSIKOLOGIS
+        </Text>
         {chartImage ? (
           <Image
             src={chartImage}
