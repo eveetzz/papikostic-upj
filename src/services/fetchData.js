@@ -34,17 +34,7 @@ export const fetchScoringRules = async () => {
       rules[doc.id] = doc.data();
     });
 
-    // const rules = snap.docs.reduce((acc, doc) => {
-    //   acc[doc.id] = doc.data();
-    //   return acc;
-    // }, {});
-
     return rules;
-
-    // return snap.docs.map((doc) => ({
-    //   id: doc.id,
-    //   ...doc.data(),
-    // }));
   } catch (error) {
     console.error("Tidak dapat memuat data", error);
     return {};

@@ -10,24 +10,23 @@ export const NavbarAdmin = () => {
   const menuItems = [
     { to: "/admin/dashboard", label: "Beranda", icon: Home },
     { to: "/admin/test-result", label: "Hasil Tes", icon: FileText },
-    // { to: "/admin/dummy-page", label: "dummy", icon: FileText },
     { to: "/admin/manage-user", label: "Kelola Pengguna", icon: Users },
   ];
 
   return (
     <>
-      {/* Mobile Menu Button */}
       <button
-        className="lg:hidden fixed top-4 left-4 z-50 bg-[#1e5a9e] text-white p-2 rounded-md"
+        className={`lg:hidden fixed top-4 z-50 bg-[#1e5a9e] text-white p-2 rounded-r-md transition-all duration-300 shadow-lg ${
+          isOpen ? "left-64" : "left-0"
+        }`}
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
 
-      {/* Overlay for mobile */}
       {isOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
+          className="lg:hidden fixed inset-0 bg-stone-950/50 z-30"
           onClick={() => setIsOpen(false)}
         />
       )}
@@ -50,9 +49,6 @@ export const NavbarAdmin = () => {
           <div>
             <h1 className="font-bold">HRD UPJ</h1>
           </div>
-          {/* <button className="ml-auto">
-              <Menu className="w-6 h-6" />
-            </button> */}
         </div>
 
         {/* Menu Items */}
@@ -89,7 +85,7 @@ export const NavbarAdmin = () => {
 
         {/* Footer */}
         <div className="p-4 border-t border-blue-700">
-          <p className="text-xs text-blue-300">PAPIKOSTICK</p>
+          <p className="text-xs text-blue-300">PAPIKOSTICK UPJ</p>
         </div>
       </aside>
     </>

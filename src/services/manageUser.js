@@ -1,4 +1,3 @@
-import { uid } from "chart.js/helpers";
 import { db, firebaseConfig } from "../firebase";
 import {
   collection,
@@ -39,7 +38,14 @@ export const getUserResults = (callback) => {
   });
 };
 
-export const addUser = async (name, email, password, role) => {
+export const addUser = async (
+  name,
+  email,
+  password,
+  role,
+  position,
+  company,
+) => {
   try {
     const signUpUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${firebaseConfig.apiKey}`;
     const signUpRes = await fetch(signUpUrl, {
@@ -62,11 +68,12 @@ export const addUser = async (name, email, password, role) => {
 
     const newUid = signUpData.localId;
 
-    // Baru simpan ke Firestore setelah Auth dipastikan sukses
     await setDoc(doc(db, "users", newUid), {
       email: email.toLowerCase().trim(),
       displayName: name,
       role: role,
+      position: position,
+      company: company,
       examStatus: "-",
       examStartTime: null,
       examEndTime: null,
@@ -112,30 +119,3 @@ export const updateStatusReview = async (uid, newStatus) => {
     return { success: false, error: error.message };
   }
 };
-
-// export const addUser = async (name, email, password, role) => {
-//   try {
-//     const userCredential = await createUserWithEmailAndPassword(
-//       auth,
-//       email,
-//       password,
-//     );
-
-//     await updateProfile(userCredential.user, {
-//       displayName: name,
-//     });
-
-//     await setDoc(doc(db, "users", userCredential.user.uid), {
-//       email,
-//       displayName: name,
-//       role: role, //by default
-//       examStatus: "-",
-//       examStartTime: null,
-//       examEndTime: null,
-//       createdAt: Date.now(),
-//     });
-//     return { success: true, user: userCredential.user };
-//   } catch (error) {
-//     return { success: false, error: error.message };
-//   }
-// };

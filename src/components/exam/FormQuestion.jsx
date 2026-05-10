@@ -11,7 +11,6 @@ export const FormQuestion = memo(
     onSubmit,
     isSaving,
     visualDeadline,
-    // onTimeUp,
     visitedQuestions = [],
     isTutorial = false,
     openSidebar = false,
@@ -39,11 +38,6 @@ export const FormQuestion = memo(
     const prev = () => {
       if (index > 0) setIndex(index - 1);
     };
-
-    // const handleSidebar = useCallback((idx) => {
-    //   setShowList(false);
-    //   setIndex(idx);
-    // }, []);
 
     const q = questions[index];
 
@@ -180,7 +174,12 @@ export const FormQuestion = memo(
             ? "relative z-50 bg-[#FF9533] text-white shadow-[0_0_0_6px_rgba(255,199,44,0.95)] md:mr-[-90px]"
             : "bg-[#FF9533] text-white"
         }`}
-                disabled={isTutorial}
+                disabled={
+                  isTutorial ||
+                  isSaving ||
+                  (index === questions.length - 1 &&
+                    Object.keys(answers).length < questions.length)
+                }
                 onClick={index === questions.length - 1 ? onSubmit : next}
               >
                 {isSaving

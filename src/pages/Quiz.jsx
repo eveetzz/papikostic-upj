@@ -80,7 +80,7 @@ export const Quiz = () => {
     setTraits(getTraits());
   }, []);
 
-  // === 4. TAMBAHAN: PERINGATAN JIKA MAU TUTUP TAB ===
+  // PERINGATAN JIKA MAU TUTUP TAB 
   useEffect(() => {
     const handleBeforeUnload = (e) => {
       if (!result) {
@@ -99,26 +99,22 @@ export const Quiz = () => {
   }, [answers]);
 
   // auto submit
-
   useEffect(() => {
     if (!actualDeadline) return;
 
     const checkTime = setInterval(() => {
-      const now = Date.now()
+      const now = Date.now();
       if (now >= actualDeadline) {
-        clearInterval(checkTime)
-        alert("Waktu Habis! Terima kasih telah mengikuti tes. Soal akan otomatis tertutup dan hasil akan diproses.");
-        handleSubmit()
+        clearInterval(checkTime);
+        alert(
+          "Waktu Habis! Terima kasih telah mengikuti tes. Soal akan otomatis tertutup dan hasil akan diproses.",
+        );
+        handleSubmit();
       }
-    }, 1000)
+    }, 1000);
 
-    return () => clearInterval(checkTime)
-  },[actualDeadline])
-
-  // const handleTimeUp = () => {
-  //   alert("Waktu Habis! Soal akan otomatis tertutup");
-  //   handleSubmit();
-  // };
+    return () => clearInterval(checkTime);
+  }, [actualDeadline]);
 
   const handleSubmit = async () => {
     const user = auth.currentUser;
@@ -134,8 +130,8 @@ export const Quiz = () => {
     }
     try {
       setIsSaving(true);
-      // if (Object.keys(answers).length !== questions.length)
-      //   return alert("Silahkan jawab semua pertanyaan sebelum submit");
+      if (Object.keys(answers).length !== questions.length)
+        return alert("Silahkan jawab semua pertanyaan sebelum submit");
 
       const scores = calculateScore(answers, scoringRules);
 

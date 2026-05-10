@@ -261,7 +261,10 @@ export const TestResult = () => {
       <>
         {/* HEADER */}
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">Hasil Tes</h1>
+          <div className="flex items-center gap-3">
+            <div className="w-5 md:hidden" />
+            <h1 className="text-xl md:text-2xl font-bold">Hasil Tes</h1>
+          </div>
 
           {/* Container Dropdown */}
           <div className="relative">

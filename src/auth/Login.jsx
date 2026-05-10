@@ -128,33 +128,17 @@ export const Login = () => {
                 </button>
 
                 {/* OR */}
-                <div className="flex items-center gap-2 my-2">
-                  <div className="flex-1 border-t border-gray-300" />
-                  <span className="text-gray-400 text-xs">or</span>
-                  <div className="flex-1 border-t border-gray-300" />
-                </div>
-
-                {/* SOCIAL LOGIN */}
-                <div className="flex flex-col gap-2">
-                  <button
-                    type="button"
-                    onClick={handleLoginWithGoogle}
-                    className="w-full h-11 flex items-center justify-center gap-2 border border-gray-200 rounded-lg shadow-sm"
-                  >
-                    <img src={googleLogo} className="w-5 h-5" alt="Google" />
-                    Google
-                  </button>
+                <div className="flex items-center">
                 </div>
               </form>
             </div>
 
             {/* SIGN UP */}
             <p className="text-gray-500 text-sm mt-4 text-center">
-              Tidak memiliki akun?{" "}
+              Mengalami kendala?{" "}
               <span
                 className="underline cursor-pointer"
                 href="#"
-                onClick={() => navigate("/register")}
               >
                 Hubungi Admin
               </span>

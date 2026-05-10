@@ -1,7 +1,4 @@
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { db } from "../../firebase";
-import { getDocs } from "firebase/firestore";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Search,
   Trash2,
@@ -9,6 +6,7 @@ import {
   ChevronRight,
   Edit,
   Plus,
+  ImportIcon,
 } from "lucide-react";
 import { AddUser } from "../../components/admin/AddUser";
 import {
@@ -20,6 +18,8 @@ import {
 import { EditUser } from "../../components/admin/EditUser";
 import { DeleteUser } from "../../components/admin/deleteUser";
 import { Pagination } from "../../components/Pagination";
+import { importUsers } from "../../services/importService";
+import { ImportUser } from "../../components/import/ImportUser";
 
 export const ManageUser = () => {
   const [users, setUsers] = useState([]);
@@ -32,6 +32,8 @@ export const ManageUser = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const [isImportModalOpen, setIsImportModalOpen] = useState(false);
 
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -106,7 +108,7 @@ export const ManageUser = () => {
           {/* BARIS JUDUL */}
           <div className="flex items-center gap-3">
             {/* Spacer untuk hamburger */}
-            <div className="w-8 md:hidden" />
+            <div className="w-5 md:hidden" />
 
             <h1 className="text-xl md:text-2xl font-bold">Kelola Pengguna</h1>
           </div>
@@ -134,6 +136,13 @@ export const ManageUser = () => {
             >
               <Plus className="w-5 h-5" />
               Tambah
+            </button>
+            <button
+              onClick={() => setIsImportModalOpen(true)}
+              className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition flex items-center gap-2 justify-center"
+            >
+              <ImportIcon className="w-5 h-5" />
+              Import
             </button>
           </div>
         </div>
@@ -177,7 +186,10 @@ export const ManageUser = () => {
                   </tr>
                 ) : (
                   currentItems.map((user, index) => (
-                    <tr key={user.id} className="border-b border-gray-200 hover:bg-gray-50">
+                    <tr
+                      key={user.id}
+                      className="border-b border-gray-200 hover:bg-gray-50"
+                    >
                       <td className="px-4 py-3 text-sm">
                         {indexOfFirstItem + index + 1}
                       </td>
@@ -250,6 +262,11 @@ export const ManageUser = () => {
             userName={selectedUser?.displayName}
           />
         )}
+
+        <ImportUser
+          isOpen={isImportModalOpen}
+          onClose={() => setIsImportModalOpen(false)}
+        />
       </div>
     </>
   );

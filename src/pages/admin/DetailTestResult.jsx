@@ -53,7 +53,7 @@ export const DetailTestResult = ({ user, onBack, onUpdateStatus }) => {
           {/* BARIS ATAS: JUDUL */}
           <div className="flex items-center gap-3">
             {/* spacer untuk hamburger */}
-            <div className="w-8 md:hidden" />
+            <div className="w-5 md:hidden" />
 
             <h1 className="text-xl md:text-2xl font-bold text-black">
               Detail Hasil Tes
@@ -98,7 +98,7 @@ export const DetailTestResult = ({ user, onBack, onUpdateStatus }) => {
                 className="flex text-sm font-medium items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 w-full sm:w-auto"
               >
                 <Download className="w-6 h-5" />
-                Download PDF
+                Export to PDF
               </button>
 
               <PreviewPDF isOpen={openPDF} onClose={() => setOpenPDF(false)}>

@@ -30,13 +30,13 @@ export const DashboardAdmin = () => {
 
   const [recentActivity, setRecentActivity] = useState([]);
   const [statusReview, setStatusReview] = useState([]);
-  const [displayedUsers, setdisplayedUsers] = useState([]);
+  const [displayedUsers, setDisplayedUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const nav = useNavigate();
 
   useEffect(() => {
-    const getAllUsers = getUsers(setdisplayedUsers);
+    const getAllUsers = getUsers(setDisplayedUsers);
 
     return () => getAllUsers();
   }, []);
@@ -99,9 +99,6 @@ export const DashboardAdmin = () => {
           return date.getMonth() === currentMonth;
         }).length;
 
-        // meniapkan Data "Aktivitas Terbaru"
-        // Ambil 5 data teratas dari resultsList (karena sudah disort desc tadi
-
         const recentActivities = resultsList.slice(0, 5).map((res) => {
           let actionLabel = "Menyelesaikan tes";
 
@@ -129,9 +126,6 @@ export const DashboardAdmin = () => {
             };
           });
 
-        // menyiapkan Data "Statistic Personality" (Grafik Bar)
-        const chartFormatted = calculateTotalPersonalityScores(resultsList);
-
         setStats({
           totalUsers,
           completedTest,
@@ -141,7 +135,7 @@ export const DashboardAdmin = () => {
 
         setRecentActivity(recentActivities);
         setStatusReview(statusReview);
-        setdisplayedUsers(userList);
+        setDisplayedUsers(userList);
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
       } finally {
@@ -194,7 +188,7 @@ export const DashboardAdmin = () => {
           {/* BARIS JUDUL */}
           <div className="flex items-center gap-3">
             {/* Spacer untuk hamburger */}
-            <div className="w-8 md:hidden" />
+            <div className="w-5 md:hidden" />
 
             <h1 className="text-xl md:text-2xl font-bold">Dashboard</h1>
           </div>
@@ -284,7 +278,7 @@ export const DashboardAdmin = () => {
         {/* Kelola Pengguna Table */}
         <div className="bg-white rounded-lg shadow p-6 mt-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-bold">Daftar User</h2>
+            <h2 className="font-bold">Daftar User Terbaru</h2>
             <button
               className="text-blue-600 hover:text-blue-700"
               onClick={() => nav("/admin/manage-user")}
@@ -311,7 +305,7 @@ export const DashboardAdmin = () => {
                 </tr>
               </thead>
               <tbody>
-                {displayedUsers.map((user, index) => (
+                {displayedUsers.slice(0, 10).map((user, index) => (
                   <tr
                     key={index}
                     className="border-b border-gray-200 hover:bg-gray-50"
