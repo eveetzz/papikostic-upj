@@ -19,7 +19,7 @@
   "B": {
     "id": "B",
     "category": "SOCIAL NATURE",
-    "description": "kebutuhan berkelompok",
+    "description": "Kebutuhan Berkelompok",
     "interpretations": [
       {
         "min": 0,
@@ -41,7 +41,7 @@
   "C": {
     "id": "C",
     "category": "WORK STYLE",
-    "description": "tipe organisator",
+    "description": "Tipe organisator",
     "interpretations": [
       {
         "min": 0,
@@ -63,7 +63,7 @@
   "D": {
     "id": "D",
     "category": "WORK STYLE",
-    "description": "minat bekerja secara detil",
+    "description": "Minat bekerja secara detil",
     "interpretations": [
       {
         "min": 0,
@@ -80,7 +80,7 @@
   "E": {
     "id": "E",
     "category": "TEMPERAMENT",
-    "description": "pengendalian emosi",
+    "description": "Pengendalian emosi",
     "interpretations": [
       {
         "min": 0,
@@ -178,7 +178,7 @@
   "K": {
     "id": "K",
     "category": "TEMPERAMENT",
-    "description": "kebutuhan untuk memimpin",
+    "description": "Kebutuhan untuk memimpin",
     "interpretations": [
       {
         "min": 0,
@@ -210,7 +210,7 @@
   "L": {
     "id": "L",
     "category": "LEADERSHIP",
-    "description": "peran kepemimpinan ",
+    "description": "Peran kepemimpinan ",
     "interpretations": [
       {
         "min": 0,
@@ -227,7 +227,7 @@
   "N": {
     "id": "N",
     "category": "WORK DIRECTION",
-    "description": " kebutuhan menyelesaikan tugas",
+    "description": "Kebutuhan menyelesaikan tugas",
     "interpretations": [
       {
         "min": 0,
@@ -254,7 +254,7 @@
   "O": {
     "id": "O",
     "category": "SOCIAL NATURE",
-    "description": "butuh keintiman dan kasih sayang",
+    "description": "Butuh keintiman dan kasih sayang",
     "interpretations": [
       {
         "min": 0,
@@ -276,7 +276,7 @@
   "P": {
     "id": "P",
     "category": "LEADERSHIP",
-    "description": "kebutuhan mengendalikan orang lain",
+    "description": "Kebutuhan mengendalikan orang lain",
     "interpretations": [
       {
         "min": 0,
@@ -293,7 +293,7 @@
   "R": {
     "id": "R",
     "category": "WORK STYLE",
-    "description": "tipe teoritis",
+    "description": "Tipe teoritis",
     "interpretations": [
       {
         "min": 0,
@@ -310,7 +310,7 @@
   "S": {
     "id": "S",
     "category": "SOCIAL NATURE",
-    "description": "social extension",
+    "description": "Social extension",
     "interpretations": [
       {
         "min": 0,
@@ -327,7 +327,7 @@
   "T": {
     "id": "T",
     "category": "ACTIVITY",
-    "description": "pace",
+    "description": "Pace",
     "interpretations": [
       {
         "min": 0,
@@ -361,7 +361,7 @@
   "W": {
     "id": "W",
     "category": "FOLLOWERSHIP",
-    "description": "kebutuhan untuk mengatur dan mengawasi",
+    "description": "Kebutuhan untuk mengatur dan mengawasi",
     "interpretations": [
       {
         "min": 0,
@@ -410,7 +410,7 @@
   "Z": {
     "id": "Z",
     "category": "TEMPERAMENT",
-    "description": "kebutuhan akan perubahan",
+    "description": "Kebutuhan akan perubahan",
     "interpretations": [
       {
         "min": 0,
