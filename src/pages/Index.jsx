@@ -7,6 +7,7 @@ import { startExam } from "../services/fetchData";
 import { useAuth } from "../components/security/AuthGuard";
 import headLogo from "../assets/image 38.png";
 import { InstructionScreen } from "./InstructionScreen";
+import Footer from "../components/Footer";
 
 export const Index = () => {
   const navigate = useNavigate();
@@ -74,26 +75,25 @@ export const Index = () => {
   }
 
   return (
-    // Ganti bagian class pembungkus utama
-    <div className="h-screen w-screen bg-[#1A5A9A] overflow-hidden flex flex-col items-center relative">
+    <div className="min-h-screen w-full bg-[#1A5A9A] overflow-y-auto flex flex-col items-center">
       <Navbar user={userData} />
 
-      {/* Container Utama: Gunakan flex-1 dan justify-evenly agar konten menyebar otomatis */}
-      <div className="flex-1 flex flex-col items-center justify-evenly w-full px-4 py-6 max-h-screen">
-        {/* Profile - Ukuran responsif menggunakan h-[20vh] agar proporsional dengan tinggi layar */}
+      {/* Container tengah yang fleksibel */}
+      <div className="flex-1 flex flex-col items-center justify-start w-full px-4 pt-10 mt-10 pb-20 gap-10">
+        
+        {/* Profile Group */}
         <div className="flex flex-col items-center">
           <img
             src={headLogo}
             alt="profile"
-            className="w-auto h-[20vh] min-h-[120px] max-h-[215px] rounded-full shadow-lg"
+            className="w-auto h-[180px] md:h-[200px] rounded-full shadow-lg object-cover"
           />
 
-          {/* Text Group */}
-          <div className="text-center mt-4">
-            <h1 className="text-white font-black text-[clamp(18px,4vw,25px)]">
+          <div className="text-center mt-6">
+            <h1 className="text-white font-black text-[24px] md:text-[28px]">
               Halo {userData?.displayName},
             </h1>
-            <h3 className="text-white font-bold text-[clamp(20px,5vw,30px)] leading-tight mt-2">
+            <h3 className="text-white font-bold text-[26px] md:text-[32px] leading-tight mt-2">
               Selamat Datang di <br className="sm:hidden" /> Tes PAPIKOSTICK!
             </h3>
           </div>
@@ -103,7 +103,7 @@ export const Index = () => {
         <div className="flex flex-col items-center gap-4 w-full max-w-[330px]">
           <button
             onClick={handleOpenTutorial}
-            className="w-full h-[50px] bg-[#003366] rounded-md shadow-md text-white text-[18px] font-medium hover:bg-[#004080] transition-all"
+            className="w-full h-[52px] bg-[#003366] rounded-md shadow-md text-white text-[18px] font-medium hover:bg-[#004080] transition-all active:scale-95"
           >
             Lihat Tutorial
           </button>
@@ -115,16 +115,21 @@ export const Index = () => {
               userStatus === "completed" ||
               userStatus === "loading"
             }
-            className={`w-full h-[50px] rounded-md shadow-md text-[18px] font-medium transition-all
-        ${
-          userStatus === "completed" || !tutorialDone
-            ? "bg-gray-400 text-gray-200 cursor-not-allowed opacity-60"
-            : "bg-[#2563EB] text-white cursor-pointer hover:bg-[#1088ff]"
-        }`}
+            className={`w-full h-[52px] rounded-md shadow-md text-[18px] font-medium transition-all active:scale-95
+            ${
+              userStatus === "completed" || !tutorialDone
+                ? "bg-gray-400 text-gray-200 cursor-not-allowed opacity-60"
+                : "bg-[#2563EB] text-white cursor-pointer hover:bg-[#1088ff]"
+            }`}
           >
             Ikuti Tes
           </button>
         </div>
+      </div>
+
+      {/* Footer akan selalu berada di paling bawah karena flex-1 di atas mendorongnya */}
+      <div className="w-full mt-20">
+        <Footer />
       </div>
     </div>
   );
