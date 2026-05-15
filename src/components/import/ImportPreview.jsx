@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import { addUser } from "../../services/manageUser";
 import { Trash, X } from "lucide-react";
+import { generateRandomPassword } from "../../services/importService";
 
 export const ImportPreview = ({ data, setData, onClose, onConfirm }) => {
   const [loading, setLoading] = useState(false);
@@ -19,11 +20,16 @@ export const ImportPreview = ({ data, setData, onClose, onConfirm }) => {
     setLoading(true);
     for (let i = 0; i < validData.length; i++) {
       const user = validData[i];
+
+      const generatedPassword = user.Password
+        ? user.Password.toString()
+        : generateRandomPassword(user.Nama);
+        
       // Menggunakan data dari Excel (Nama, Email, Password, dll)
       await onConfirm(
         user.Nama, // || row[""] sesuaikan isi string dengan header di file excel
         user.Email,
-        user.Password?.toString(),
+        generatedPassword,
         "user",
         user.Posisi,
         user.Perusahaan,

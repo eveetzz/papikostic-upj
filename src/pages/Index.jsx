@@ -7,7 +7,7 @@ import { startExam } from "../services/fetchData";
 import { useAuth } from "../components/security/AuthGuard";
 import headLogo from "../assets/image 38.png";
 import { InstructionScreen } from "./InstructionScreen";
-import Footer from "../components/Footer";
+import { Footer } from "../components/Footer";
 
 export const Index = () => {
   const navigate = useNavigate();
@@ -80,7 +80,6 @@ export const Index = () => {
 
       {/* Container tengah yang fleksibel */}
       <div className="flex-1 flex flex-col items-center justify-start w-full px-4 pt-10 mt-10 pb-20 gap-10">
-        
         {/* Profile Group */}
         <div className="flex flex-col items-center">
           <img
@@ -127,7 +126,6 @@ export const Index = () => {
         </div>
       </div>
 
-      {/* Footer akan selalu berada di paling bawah karena flex-1 di atas mendorongnya */}
       <div className="w-full mt-20">
         <Footer />
       </div>

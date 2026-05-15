@@ -3,62 +3,6 @@ import * as XLSX from "xlsx";
 import { collection, getDocs, where, query } from "firebase/firestore";
 import { db } from "../firebase";
 
-// export const ImportUsers = async (file) => {
-//   // Validasi: Cek apakah file benar-benar ada dan bertipe Blob/File
-//   if (!file) {
-//     throw new Error("File tidak ditemukan.");
-//   }
-//   return new Promise((resolve, reject) => {
-//     const reader = new FileReader();
-
-//     reader.onload = async (e) => {
-//       try {
-//         const data = new Uint8Array(e.target.result);
-//         const workbook = XLSX.read(data, { type: "array" });
-
-//         const firstSheetName = workbook.SheetNames[0];
-
-//         const jsonData = XLSX.utils.sheet_to_json(
-//           workbook.Sheets[firstSheetName],
-//         );
-//         const summary = { success: 0, failed: 0, errors: [] };
-
-//         for (const row of jsonData) {
-//           const name = row.Nama; // || row[""] sesuaikan isi string dengan header di file excel
-//           const email = row.Email;
-//           const password = row.Password.toString();
-//           const role = "user";
-//           const position = row.Posisi;
-//           const company = row.Perusahaan;
-
-//           if (!email) continue;
-
-//           const result = await addUser(
-//             name,
-//             email,
-//             password,
-//             role,
-//             position,
-//             company,
-//           );
-
-//           if (result.success) {
-//             summary.success++;
-//           } else {
-//             summary.failed++;
-//             summary.errors.push({ email, error: result.error });
-//           }
-//         }
-//         resolve(summary);
-//       } catch (error) {
-//         reject(error);
-//       }
-//     };
-//     reader.onerror = (error) => reject(error);
-//     reader.readAsArrayBuffer(file);
-//   });
-// };
-
 export const importUsers = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -102,4 +46,22 @@ export const checkExistingUsers = async (data) => {
       item.Email?.toLowerCase().trim(),
     ),
   }));
+};
+
+export const generateRandomPassword = (
+  name = "user",
+  timeStamp = Date.now(),
+) => {
+  const firstLetter = name
+    .trim()
+    .replace(/\s+/g, "")
+    .substring(0, 3)
+    .toLowerCase();
+
+  const date = new Date(Number(timeStamp));
+  const validDate = isNaN(date.getTime()) ? new Date() : date;
+
+  const dateRegistered = `${validDate.getFullYear()}${String(validDate.getMonth() + 1).padStart(2, "0")}${String(validDate.getDate()).padStart(2, "0")}`;
+
+  return `${firstLetter}${"."}${dateRegistered}`;
 };

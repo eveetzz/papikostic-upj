@@ -1,10 +1,12 @@
-const Footer = () => {
+// Footer.jsx
+import React from "react";
+
+export const Footer = () => {
   return (
     <footer className="bg-white w-full py-4 border-t border-gray-200">
       <div className="w-full px-4 md:px-10">
         {/* Menggunakan grid dengan 3 kolom yang proporsional */}
         <div className="grid grid-cols-3 gap-2 text-[10px] md:text-[11px] leading-tight items-start">
-          
           {/* Kiri: Dibuat Oleh */}
           <div className="flex flex-col">
             <h3 className="text-[#3d6f8e] font-bold uppercase text-[8px] md:text-[9px] mb-1">
@@ -44,7 +46,5 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  );
-};
-
-export default Footer;
+  )
+}
