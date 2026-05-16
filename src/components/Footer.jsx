@@ -14,8 +14,8 @@ export const Footer = () => {
             </h3>
             <ul className="text-gray-400 space-y-0.5">
               <li>Mutiara Fitria Azzahra, SIF 2023</li>
-              <li>Evan Alfiansyah, SIF 2023</li>
               <li>Adie Suryo Saputro, SIF 2023</li>
+              <li>Evan Alfiansyah, SIF 2023</li>
             </ul>
           </div>
 

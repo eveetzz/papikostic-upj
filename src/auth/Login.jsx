@@ -134,14 +134,14 @@ export const Login = () => {
             </div>
 
             {/* SIGN UP */}
-            <p className="text-gray-500 text-sm mt-4 text-center">
-              Mengalami kendala?{" "}
-              <span
+            <p className="text-gray-500 text-sm mt-2 text-center">
+              @2026 - Prodi Sistem Informasi UPJ powered by ICT
+              {/* <span
                 className="underline cursor-pointer"
                 href="#"
               >
                 Hubungi Admin
-              </span>
+              </span> */}
             </p>
           </div>
         </main>

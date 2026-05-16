@@ -126,9 +126,7 @@ export const Index = () => {
         </div>
       </div>
 
-      <div className="w-full mt-20">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };
