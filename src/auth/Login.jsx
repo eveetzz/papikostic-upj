@@ -128,20 +128,13 @@ export const Login = () => {
                 </button>
 
                 {/* OR */}
-                <div className="flex items-center">
-                </div>
+                <div className="flex items-center"></div>
               </form>
             </div>
 
             {/* SIGN UP */}
-            <p className="text-gray-500 text-sm mt-2 text-center">
+            <p className="text-gray-500 text-[11px] mt-2 text-center">
               @2026 - Prodi Sistem Informasi UPJ powered by ICT
-              {/* <span
-                className="underline cursor-pointer"
-                href="#"
-              >
-                Hubungi Admin
-              </span> */}
             </p>
           </div>
         </main>
