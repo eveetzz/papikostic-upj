@@ -156,7 +156,7 @@ export const Quiz = () => {
       if (now >= extraDeadline) {
         clearInterval(checkExtraTime); // Matikan timer bonus
         alert("Waktu tambahan telah habis. Jawaban akan otomatis dikumpulkan.");
-        handleSubmitRef.current({ forceSubmit: true, status: "incomplete_timeout" });
+        handleSubmitRef.current({ forceSubmit: true, status: "uncompleted" });
       }
     }, 1000);
 
@@ -170,7 +170,7 @@ export const Quiz = () => {
       options = {};
     }
 
-    const { forceSubmit = false, status = "complete" } = options;
+    const { forceSubmit = false, status = "completed" } = options;
 
     const user = auth.currentUser;
     if (!user) return alert("User tidak ditemukan");
@@ -220,7 +220,7 @@ export const Quiz = () => {
       });
 
       localStorage.removeItem("temp_answers");
-      await updateExamStatus();
+      await updateExamStatus(status);
 
       setDuration(duration);
       setResult(report);

@@ -101,10 +101,10 @@ export const saveResult = async ({
   }
 };
 
-export const updateExamStatus = async () => {
+export const updateExamStatus = async (status) => {
   try {
     await updateDoc(doc(db, "users", auth.currentUser.uid), {
-      examStatus: "completed",
+      examStatus: status,
     });
   } catch (error) {
     console.error("Gagal memperbarui status ujian:", error);

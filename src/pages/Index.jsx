@@ -112,11 +112,12 @@ export const Index = () => {
             disabled={
               !tutorialDone ||
               userStatus === "completed" ||
+              userStatus === "uncompleted" ||
               userStatus === "loading"
             }
             className={`w-full h-[52px] rounded-md shadow-md text-[18px] font-medium transition-all active:scale-95
             ${
-              userStatus === "completed" || !tutorialDone
+              userStatus === "completed" || userStatus === "uncompleted" || !tutorialDone
                 ? "bg-gray-400 text-gray-200 cursor-not-allowed opacity-60"
                 : "bg-[#2563EB] text-white cursor-pointer hover:bg-[#1088ff]"
             }`}
