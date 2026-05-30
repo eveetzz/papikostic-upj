@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { auth, db } from "../firebase";
 import { saveResult, updateExamStatus } from "../services/fetchData";
 import {
@@ -32,6 +32,8 @@ export const Quiz = () => {
   const [showTable, setShowTable] = useState(false);
   const [topTraits, setTopTraits] = useState([]);
 
+  const [isExtraTime, setIsExtraTime] = useState(false);
+
   const { userData } = useAuth();
 
   const [answers, setAnswers] = useState(() => {
@@ -42,8 +44,25 @@ export const Quiz = () => {
   const [visualDeadline, setVisualDeadline] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [actualDeadline, setActualDeadline] = useState(null);
-
+  const [extraDeadline, setExtraDeadline] = useState(null);
   const [duration, setDuration] = useState(null);
+
+  // ✅ Ref untuk menghindari stale closure di dalam interval
+  const answersRef = useRef(answers);
+  const questionsRef = useRef(questions);
+  const scoringRulesRef = useRef(scoringRules);
+  const analysisRulesRef = useRef(analysisRules);
+  const traitsRef = useRef(traits);
+  const startTimeRef = useRef(startTime);
+  const handleSubmitRef = useRef(null);
+
+  // ✅ Sync semua ref setiap kali state terkait berubah
+  useEffect(() => { answersRef.current = answers; }, [answers]);
+  useEffect(() => { questionsRef.current = questions; }, [questions]);
+  useEffect(() => { scoringRulesRef.current = scoringRules; }, [scoringRules]);
+  useEffect(() => { analysisRulesRef.current = analysisRules; }, [analysisRules]);
+  useEffect(() => { traitsRef.current = traits; }, [traits]);
+  useEffect(() => { startTimeRef.current = startTime; }, [startTime]);
 
   const navigate = useNavigate();
 
@@ -58,11 +77,8 @@ export const Quiz = () => {
           const startDeadline = data.examStartTime.toMillis();
 
           setStartTime(startDeadline);
-
           setActualDeadline(realDeadline);
-
-          const buffer = 5 * 60 * 1000;
-          setVisualDeadline(realDeadline - buffer);
+          setVisualDeadline(realDeadline);
         }
       } catch (error) {
         console.error("error cant set timer", error);
@@ -80,7 +96,7 @@ export const Quiz = () => {
     setTraits(getTraits());
   }, []);
 
-  // PERINGATAN JIKA MAU TUTUP TAB 
+  // PERINGATAN JIKA MAU TUTUP TAB
   useEffect(() => {
     const handleBeforeUnload = (e) => {
       if (!result) {
@@ -98,46 +114,97 @@ export const Quiz = () => {
     }
   }, [answers]);
 
-  // auto submit
+// =========================================================================
+  // 🎯 1. TIMER UTAMA (Hanya butuh SATU blok ini saja, duplikatnya dibuang)
+  // =========================================================================
   useEffect(() => {
-    if (!actualDeadline) return;
+    if (!actualDeadline || isExtraTime || questions.length === 0) return;
 
     const checkTime = setInterval(() => {
       const now = Date.now();
       if (now >= actualDeadline) {
-        clearInterval(checkTime);
-        alert(
-          "Waktu Habis! Terima kasih telah mengikuti tes. Soal akan otomatis tertutup dan hasil akan diproses.",
-        );
-        handleSubmit();
+        clearInterval(checkTime); // Langsung matikan biar gak looping!
+
+        const allAnswered =
+          Object.keys(answersRef.current).length === questions.length;
+
+        if (allAnswered) {
+          handleSubmitRef.current();
+        } else {
+          alert(
+            "Waktu telah habis, tetapi ada tambahan waktu 5 menit untuk menyelesaikan soal yang belum terisi."
+          );
+          const extra = Date.now() + 5 * 60 * 1000;
+          setExtraDeadline(extra);
+          setIsExtraTime(true); // Mengunci timer utama ini agar berhenti total
+          setVisualDeadline(extra);
+        }
       }
     }, 1000);
 
     return () => clearInterval(checkTime);
-  }, [actualDeadline]);
+  }, [actualDeadline, isExtraTime, questions.length]); // Dependencies lengkap
 
-  const handleSubmit = async () => {
+  // =========================================================================
+  // ⏱️ 2. TIMER WAKTU TAMBAHAN (Ini pengganti duplikatnya, tugasnya beda!)
+  // =========================================================================
+  useEffect(() => {
+    if (!extraDeadline) return;
+
+    const checkExtraTime = setInterval(() => {
+      const now = Date.now();
+      if (now >= extraDeadline) {
+        clearInterval(checkExtraTime); // Matikan timer bonus
+        alert("Waktu tambahan telah habis. Jawaban akan otomatis dikumpulkan.");
+        handleSubmitRef.current({ forceSubmit: true, status: "incomplete_timeout" });
+      }
+    }, 1000);
+
+    return () => clearInterval(checkExtraTime);
+  }, [extraDeadline]); // ✅ Pastikan mendengarkan perubahan jumlah soal
+
+  const handleSubmit = async (options = {}) => {
+    // Guard: jika options adalah event object (dari form submit), reset ke {}
+    if (options && typeof options.preventDefault === "function") {
+      options.preventDefault();
+      options = {};
+    }
+
+    const { forceSubmit = false, status = "complete" } = options;
+
     const user = auth.currentUser;
     if (!user) return alert("User tidak ditemukan");
 
     if (
-      Object.keys(scoringRules).length === 0 ||
-      Object.keys(traits).length === 0 ||
-      Object.keys(analysisRules).length === 0
+      Object.keys(scoringRulesRef.current).length === 0 ||
+      Object.keys(traitsRef.current).length === 0 ||
+      Object.keys(analysisRulesRef.current).length === 0
     ) {
       alert("Data konfigurasi (scoring/traits) belum siap.");
       return;
     }
+
+    if (questionsRef.current.length === 0) {
+      alert("Data soal belum siap.");
+      return;
+    }
+
+    // Validasi manual: jika bukan force submit, wajib semua soal terjawab
+    if (
+      !forceSubmit &&
+      Object.keys(answersRef.current).length !== questionsRef.current.length
+    ) {
+      alert("Masih ada jawaban yang kosong, harap diisi terlebih dahulu.");
+      return;
+    }
+
     try {
       setIsSaving(true);
-      if (Object.keys(answers).length !== questions.length)
-        return alert("Silahkan jawab semua pertanyaan sebelum submit");
 
-      const scores = calculateScore(answers, scoringRules);
+      const scores = calculateScore(answersRef.current, scoringRulesRef.current);
+      const report = generateReport(scores, analysisRulesRef.current, traitsRef.current);
 
-      const report = generateReport(scores, analysisRules, traits);
-
-      const dataDuration = getDuration(startTime);
+      const dataDuration = getDuration(startTimeRef.current);
       const duration = dataDuration.durationFormatted;
 
       const topTraits = getTopTraits(report);
@@ -145,10 +212,11 @@ export const Quiz = () => {
       await saveResult({
         user,
         userData,
-        answers,
+        answers: answersRef.current,
         report,
         duration,
         topTraits,
+        status,
       });
 
       localStorage.removeItem("temp_answers");
@@ -157,7 +225,6 @@ export const Quiz = () => {
       setDuration(duration);
       setResult(report);
       setTopTraits(topTraits);
-
       setShowTable(true);
     } catch (error) {
       console.error("Detail Error Submit:", error);
@@ -167,14 +234,16 @@ export const Quiz = () => {
     }
   };
 
+  // ✅ Sync handleSubmit ke ref setiap render agar timer selalu pakai versi terbaru
+  handleSubmitRef.current = handleSubmit;
+
   const handleAnswer = useCallback((questionId, choice) => {
     setAnswers((prevAnswers) => {
       if (prevAnswers[questionId] === choice) return prevAnswers;
-      const newAnswers = {
+      return {
         ...prevAnswers,
         [questionId]: choice,
       };
-      return newAnswers;
     });
   }, []);
 
@@ -195,7 +264,6 @@ export const Quiz = () => {
       onSubmit={handleSubmit}
       isSaving={isSaving}
       visualDeadline={visualDeadline}
-      // onTimeUp={handleTimeUp}
     />
   );
 };

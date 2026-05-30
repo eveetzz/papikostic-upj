@@ -174,19 +174,13 @@ export const FormQuestion = memo(
             ? "relative z-50 bg-[#FF9533] text-white shadow-[0_0_0_6px_rgba(255,199,44,0.95)] md:mr-[-90px]"
             : "bg-[#FF9533] text-white"
         }`}
-                disabled={
-                  isTutorial ||
-                  isSaving ||
-                  (index === questions.length - 1 &&
-                    Object.keys(answers).length < questions.length)
-                }
-                onClick={index === questions.length - 1 ? onSubmit : next}
-              >
-                {isSaving
-                  ? "Saving..."
-                  : index === questions.length - 1
-                    ? "Submit"
-                    : "Next"}
+                disabled={isTutorial || isSaving}
+                onClick={index === questions.length - 1 ? onSubmit : next}>
+                  {isSaving
+                  ?"Saving..."
+                :index === questions.length - 1
+                  ?"Submit"
+                :"Next"}
               </button>
             </div>
           </div>
