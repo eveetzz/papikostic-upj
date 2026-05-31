@@ -53,7 +53,7 @@ export const Index = () => {
 
   const handleExamStart = async () => {
     try {
-      const examDuration = 20;
+      const examDuration = 1;
       const now = new Date();
       const deadline = new Date(now.getTime() + examDuration * 60000);
 
@@ -111,7 +111,8 @@ export const Index = () => {
             onClick={handleOpenInstruction}
             disabled={
               !tutorialDone ||
-              userStatus === "completed" || userStatus === "uncompleted" ||
+              userStatus === "completed" ||
+              userStatus === "uncompleted" ||
               userStatus === "loading"
             }
             className={`w-full h-[52px] rounded-md shadow-md text-[18px] font-medium transition-all active:scale-95
