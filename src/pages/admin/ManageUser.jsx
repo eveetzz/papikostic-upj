@@ -412,7 +412,7 @@ export const ManageUser = () => {
                                 setSelectedUser(user);
                                 setIsEditModalOpen(true);
                               }}
-                              className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-150"
+                              className="p-1.5 text-blue-500 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-150"
                               title="Edit pengguna"
                             >
                               <Edit className="w-5 h-6" />
@@ -423,7 +423,7 @@ export const ManageUser = () => {
                                 setSelectedUser(user);
                                 setIsDeleteModalOpen(true);
                               }}
-                              className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-all duration-150"
+                              className="p-1.5 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-all duration-150"
                               title="Hapus pengguna"
                             >
                               <Trash2 className="w-5 h-6" />
