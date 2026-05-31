@@ -2,5 +2,11 @@
 
 button {
     cursor: pointer;
+    transition: transform 0.1s ease; /* Tambahkan ini agar efek tekan terasa mulus */
+}
+
+/* Penulisan pseudo-class :active yang benar */
+button:active {
+    transform: scale(0.95); /* Gunakan scale() dengan tanda kurung */
 }
 

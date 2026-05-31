@@ -300,7 +300,7 @@ export const DashboardAdmin = () => {
                     Role
                   </th>
                   <th className="w-[10vw] px-4 py-3 text-left text-sm font-semibold text-gray-700">
-                    Exam Status
+                    Status Ujian
                   </th>
                 </tr>
               </thead>
@@ -310,21 +310,33 @@ export const DashboardAdmin = () => {
                     key={index}
                     className="border-b border-gray-200 hover:bg-gray-50"
                   >
-                    <td className="px-4 py-3 text-sm">{user.email}</td>
+                    <td className="px-4 py-3 text-sm font-medium text-gray-900">
+                      {user.email}
+                    </td>
                     <td className="px-4 py-3 text-sm">{user.displayName}</td>
                     <td className="px-4 py-3 text-sm">
                       <span
-                        className={`px-3 py-1 rounded-full text-xs ${
+                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold tracking-wide border transition-colors duration-200 ${
                           user.role === "admin"
-                            ? "bg-purple-100 text-purple-700"
-                            : "bg-green-100 text-green-700"
+                            ? "bg-purple-50 text-purple-700 border-purple-200/60"
+                            : "bg-indigo-50 text-indigo-700 border-indigo-200/60"
                         }`}
                       >
                         {user.role}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-sm">
-                      <span className={`px-3 py-1 rounded-full text-xs `}>
+                      <span
+                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold tracking-wide border transition-colors duration-200 ${
+                          user.examStatus === "completed"
+                            ? "bg-emerald-50 text-emerald-700 border-emerald-200/60"
+                            : user.examStatus === "in_progress"
+                              ? "bg-amber-50 text-amber-700 border-amber-200/60"
+                              : user.examStatus === "uncompleted"
+                                ? "bg-rose-50 text-rose-700 border-rose-200/60"
+                                : "bg-slate-50 text-slate-600 border-slate-200"
+                        }`}
+                      >
                         {user.examStatus}
                       </span>
                     </td>

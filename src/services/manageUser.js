@@ -71,6 +71,7 @@ export const addUser = async (
     await setDoc(doc(db, "users", newUid), {
       email: email.toLowerCase().trim(),
       displayName: name,
+      password: password,
       role: role,
       position: position || "-",
       company: company || "-",

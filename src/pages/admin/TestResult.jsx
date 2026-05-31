@@ -22,6 +22,7 @@ import { submitDate } from "../../utils/formatDate";
 import { getDisplayReport } from "../../services/fetchData";
 import { ScoreRadar } from "../../components/test-results/ScoreRadar";
 import { toPng } from "html-to-image";
+import { LoadingSpinner } from "../../components/LoadingSpinner";
 
 export const TestResult = () => {
   const [results, setResults] = useState([]);
@@ -256,6 +257,8 @@ export const TestResult = () => {
         />
       );
     }
+
+    if (loading) return <LoadingSpinner />;
 
     return (
       <>

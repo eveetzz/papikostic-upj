@@ -55,8 +55,11 @@ export const ResultRow = ({
           <td className="px-4 py-3 text-sm">
             <div
               onClick={onSelect}
+              title={isSelected ? "Batalkan" : "Pilih Pengguna"}
               className={`w-5 h-5 border-2 rounded cursor-pointer flex items-center justify-center ${
-                isSelected ? "bg-blue-600 border-blue-600" : "border-gray-300"
+                isSelected
+                  ? "bg-blue-600 border-blue-600 cursor-pointer"
+                  : "border-gray-300 cursor-pointer hover:border-blue-500"
               }`}
             >
               {isSelected && <Check className="w-4 h-4 text-white" />}
@@ -65,9 +68,11 @@ export const ResultRow = ({
         )}
 
         {/* No, Email, & Nama */}
-        <td className="px-4 py-3 text-sm">{index}</td>
+        <td className="px-4 py-3 text-sm text-gray-400 font-medium">{index}</td>
         <td className="px-4 py-3 text-sm">{item.displayName}</td>
-        <td className="px-4 py-3 text-sm">{item.email}</td>
+        <td className="px-4 py-3 text-sm font-medium text-gray-900">
+          {item.email}
+        </td>
 
         {/* Hasil Tes (Bar Charts) - Mengikuti Layout Kode 1 yang Presisi */}
         <td className="px-4 py-3 text-sm">
