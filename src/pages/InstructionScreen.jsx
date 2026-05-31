@@ -74,14 +74,14 @@ export const InstructionScreen = ({ handleStartExam, onback }) => {
               <div className="flex gap-2">
                 <span>•</span>
                 <p>
-                  Apabila waktu telah sisa 5 menit maka akan muncul peringatan
+                Apabila waktu tersisa 5 menit maka akan berubah menjadi merah dan berbunyi ketika waktu tersisa 30 detik
                 </p>
               </div>
               <div className="flex gap-2">
                 <span>•</span>
                 <p>
-                  Apabila waktu telah habis maka pertanyaan yang belum terisi
-                  akan otomatis diisi oleh sistem
+                  Apabila waktu telah habis maka sistem akan otomatis menyimpan dan
+                  pertanyaan yang belum diisi akan kosong
                 </p>
               </div>
             </div>
