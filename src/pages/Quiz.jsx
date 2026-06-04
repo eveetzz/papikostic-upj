@@ -8,6 +8,8 @@ import {
   getTraits,
 } from "../services/fetchJson";
 
+import Swal from "sweetalert2";
+
 import { FormQuestion } from "../components/exam/FormQuestion";
 import { ResultScreen } from "../components/exam/ResultScreen";
 
@@ -131,13 +133,20 @@ export const Quiz = () => {
         if (allAnswered) {
           handleSubmitRef.current();
         } else {
-          alert(
-            "Waktu telah habis, tetapi ada tambahan waktu 5 menit untuk menyelesaikan soal yang belum terisi."
-          );
-          const extra = Date.now() + 5 * 60 * 1000;
-          setExtraDeadline(extra);
-          setIsExtraTime(true); // Mengunci timer utama ini agar berhenti total
-          setVisualDeadline(extra);
+          Swal.fire({
+            title: "Waktu Habis!",
+            text: "Waktu utama telah habis. Apakah Anda ingin menggunakan waktu tambahan 5 menit untuk menyelesaikan jawaban yang tersisa?",
+            icon: "warning",
+            confirmButtonText: "Mengerti & Lanjutkan",
+            confirmButtonColor: "#3085d6",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+          }).then(() => {
+            const extra = Date.now() + 1 * 60 * 1000;
+            setExtraDeadline(extra);
+            setIsExtraTime(true); // Mengunci timer utama ini agar berhenti total
+            setVisualDeadline(extra);
+          });
         }
       }
     }, 1000);
@@ -155,8 +164,17 @@ export const Quiz = () => {
       const now = Date.now();
       if (now >= extraDeadline) {
         clearInterval(checkExtraTime); // Matikan timer bonus
-        alert("Waktu tambahan telah habis. Jawaban akan otomatis dikumpulkan.");
-        handleSubmitRef.current({ forceSubmit: true, status: "uncompleted" });
+        Swal.fire({
+          title: "Waktu Tambahan Habis!",
+          text: "Waktu tambahan telah habis. Jawaban akan otomatis dikumpulkan.",
+          icon: "error",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#d33",
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        }).then(() => {
+          handleSubmitRef.current({ forceSubmit: true, status: "uncompleted" });
+        });
       }
     }, 1000);
 

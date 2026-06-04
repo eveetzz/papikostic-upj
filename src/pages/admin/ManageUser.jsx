@@ -25,6 +25,7 @@ import { importUsers } from "../../services/importService";
 import { ImportUser } from "../../components/import/ImportUser";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 import { sendEmail } from "../../services/emailService";
+import Swal from "sweetalert2";
 
 export const ManageUser = () => {
   const [users, setUsers] = useState([]);
@@ -69,10 +70,20 @@ export const ManageUser = () => {
     const { name, email, password, role } = formData;
     const result = await addUser(name, email, password, role);
     if (result.success) {
-      alert("User Berhasil Ditambahkan");
+      Swal.fire({
+        title: "Berhasil!",
+        text: "User Berhasil Ditambahkan",
+        icon: "success",
+        confirmButtonColor: "#2563eb",
+      });
       setIsAddModalOpen(false);
     } else {
-      alert("Gagal: " + result.error);
+      Swal.fire({
+        title: "Gagal!",
+        text: "Gagal menambahkan user: " + result.error,
+        icon: "error",
+        confirmButtonColor: "#e53e3e",
+      });
     }
   };
 
@@ -80,20 +91,40 @@ export const ManageUser = () => {
     const { name, email, role } = formData;
     const result = await editUser(selectedUser.id, name, email, role);
     if (result.success) {
-      alert("update user berhasil");
+      Swal.fire({
+        title: "Berhasil!",
+        text: "User Berhasil Diupdate",
+        icon: "success",
+        confirmButtonColor: "#2563eb",
+      });
       setIsEditModalOpen(false);
     } else {
-      alert("Gagal: " + result.error);
+      Swal.fire({
+        title: "Gagal!",
+        text: "Gagal mengupdate user: " + result.error,
+        icon: "error",
+        confirmButtonColor: "#e53e3e",
+      });
     }
   };
 
   const handleDeleteUser = async () => {
     const result = await deleteUser(selectedUser.id);
     if (result.success) {
-      alert("User Berhasil Dihapus");
+      Swal.fire({
+        title: "Berhasil!",
+        text: "User Berhasil Dihapus",
+        icon: "success",
+        confirmButtonColor: "#2563eb",
+      });
       setIsDeleteModalOpen(false);
     } else {
-      alert("Gagal: " + result.error);
+      Swal.fire({
+        title: "Gagal!",
+        text: "Gagal menghapus user: " + result.error,
+        icon: "error",
+        confirmButtonColor: "#e53e3e",
+      });
     }
   };
 
@@ -169,9 +200,16 @@ export const ManageUser = () => {
   const handleSendEmail = async () => {
     if (selectedUsers.length === 0) return;
 
-    const confirmSend = window.confirm(
-      `Kirim email ke ${selectedUsers.length} pengguna?`,
-    );
+    const confirmSend = await Swal.fire({
+      title: "Kirim Email?",
+      text: `Anda akan mengirimkan email token ujian ke ${selectedUsers.length} pengguna terpilih.`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#f59e0b",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Ya, Kirim!",
+      cancelButtonText: "Batal"
+      });
 
     if (!confirmSend) return;
 
@@ -179,13 +217,28 @@ export const ManageUser = () => {
       setLoading(true);
       const result = await sendEmail(selectedUsers, users);
       if (result.success) {
-        alert(`Email berhasil terkirim ke ${selectedUsers.length} pengguna`);
+        Swal.fire({
+          title: "Email Terkirim!",
+          text: `Email berhasil dikirim ke ${result.sentCount} pengguna.`,
+          icon: "success",
+          confirmButtonColor: "#2563eb",
+        });
         setSelectedUsers([]);
       } else {
-        alert("Gagal:" + result.error);
+        Swal.fire({
+          title: "Gagal!",
+          text: "Gagal mengirim email: " + result.error,
+          icon: "error",
+          confirmButtonColor: "#e53e3e",
+        });
       }
     } catch (error) {
-      alert("Terjadi kesalahan pada sistem.");
+      Swal.fire({
+        title: "Error!",
+        text: "Terjadi kesalahan saat mengirim email: " + error.message,
+        icon: "error",
+        confirmButtonColor: "#e53e3e",
+      });
     } finally {
       setLoading(false);
     }

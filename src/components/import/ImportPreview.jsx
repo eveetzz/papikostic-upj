@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Trash, X } from "lucide-react";
 import { generateRandomPassword } from "../../services/importService";
 
+import Swal from "sweetalert2";
+
 export const ImportPreview = ({ data, setData, onClose, onConfirm }) => {
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -15,8 +17,15 @@ export const ImportPreview = ({ data, setData, onClose, onConfirm }) => {
 
   const startImport = async () => {
     const validData = data.filter((item) => !item.isDuplicate);
-    if (validData.length === 0) return alert("Tidak ada data baru.");
-
+    if (validData.length === 0) {
+      return Swal.fire({
+        title: "Tidak Ada Data Baru",
+        text: "Semua data kandidat pada daftar ini sudah terdaftar di sistem.",
+        icon: "warning",
+        confirmButtonColor: "#f59e0b",
+      });
+    } 
+      
     setLoading(true);
     for (let i = 0; i < validData.length; i++) {
       const user = validData[i];
@@ -37,8 +46,16 @@ export const ImportPreview = ({ data, setData, onClose, onConfirm }) => {
       setProgress(Math.round(((i + 1) / validData.length) * 100));
     }
     setLoading(false);
-    alert("Import Selesai!");
-    onClose();
+    Swal.fire({
+      title: "Import Selesai!",
+      text: `Berhasil menambahkan ${validData.length} data pengguna baru ke sistem.`,
+      icon: "success",
+      confirmButtonColor: "#2563eb",
+    }).then((result) => {
+      if (result.isConfirmed || result.isDismissed) {
+        onClose(); // Modal baru ditutup setelah klik OK pada SweetAlert
+      }
+    });
   };
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
