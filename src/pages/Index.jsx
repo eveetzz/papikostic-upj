@@ -53,7 +53,7 @@ export const Index = () => {
 
   const handleExamStart = async () => {
     try {
-      const examDuration = 1;
+      const examDuration = 15;
       const now = new Date();
       const deadline = new Date(now.getTime() + examDuration * 60000);
 

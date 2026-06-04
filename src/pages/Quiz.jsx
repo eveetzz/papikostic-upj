@@ -142,7 +142,7 @@ export const Quiz = () => {
             allowOutsideClick: false,
             allowEscapeKey: false,
           }).then(() => {
-            const extra = Date.now() + 1 * 60 * 1000;
+            const extra = Date.now() + 5 * 60 * 1000;
             setExtraDeadline(extra);
             setIsExtraTime(true); // Mengunci timer utama ini agar berhenti total
             setVisualDeadline(extra);
