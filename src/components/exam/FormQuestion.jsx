@@ -57,7 +57,7 @@ export const FormQuestion = memo(
           ${
             isTutorial && tutorialStep === 1
               ? "absolute z-50 bg-[#FFC72C] text-white shadow-[0_0_0_6px_rgba(255,199,44,0.95)]"
-              : "bg-[#FFC72C] text-white"
+              : "bg-[#FFC72C] text-[#ffffff] font-bold"
           }`}
             onClick={() => !isTutorial && setSidebarOpen(true)}
             disabled={isTutorial}

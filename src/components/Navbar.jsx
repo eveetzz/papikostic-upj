@@ -26,14 +26,21 @@ export const Navbar = ({ user }) => {
 
           {/* Dropdown */}
           {open && (
-            <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg rounded-xl border p-3">
-              <p className="text-[1.1rem] font-semibold text-gray-800 px-4 p-1 flex items-center">{user?.displayName}</p>
-              <p className="text-sm text-gray-500  px-4 flex items-center">{user?.email}</p>
+            <div className="absolute right-0 mt-2 w-max min-w-[14rem] bg-white shadow-lg rounded-xl border p-3 z-50">
+              {/* Nama User (Satu Baris) */}
+              <p className="text-[1rem] font-semibold text-gray-800 px-4 py-1 whitespace-nowrap">
+                {user?.displayName || "No Name Found"}
+              </p>
 
-              <button
-                className="w-full text-left text-red-600 font-medium hover:text-red-700"
-              >
-                <Logout/>
+              {/* Email User (Satu Baris, Memaksa Kotak Melebar ke Samping) */}
+              <p className="text-sm text-gray-500 px-4 pb-2 whitespace-nowrap">
+                {user?.email || "No Email Found"}
+              </p>
+
+              {/* Divider */}
+              <div className="border-t border-gray-100 my-1"></div>
+              <button className="w-full text-left text-red-600 font-medium hover:text-red-500">
+                <Logout />
               </button>
             </div>
           )}

@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { X } from "lucide-react";
+import { Check, RefreshCcw, X } from "lucide-react";
 
-export const EditUser = ({ users, isOpen, onClose, onSave }) => {
+export const EditUser = ({
+  users,
+  isOpen,
+  onClose,
+  onSave,
+  handleResetUser,
+}) => {
   const [formData, setFormData] = useState({
     name: "", // Di state pake 'name'
     email: "",
@@ -143,6 +149,41 @@ export const EditUser = ({ users, isOpen, onClose, onSave }) => {
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
               </select>
+            </div>
+
+            {/* Tindakan Destruktif / Manajemen Data Section */}
+            <div className="pt-4 border-t border-gray-100">
+              <div className="flex items-center justify-between p-3 bg-gray-50/50 rounded-lg gap-4 text-left">
+                {/* Teks Informasi - Ramping & Padat */}
+                <div className="max-w-[65%]">
+                  <h4 className="text-xs font-semibold text-gray-900 leading-none mb-0.5">
+                    Atur Ulang Data Tes
+                  </h4>
+                  <p className="text-[11px] text-gray-500 leading-normal">
+                    Seluruh riwayat, progres, dan nilai pengguna akan dihapus
+                    permanen.
+                  </p>
+                </div>
+
+                {/* Tombol Ramping */}
+                <button
+                  type="button"
+                  onClick={handleResetUser}
+                  className={`flex items-center gap-1.5 shrink-0 px-2.5 py-1.5 text-white border border-gray-200 text-[11px] font-medium rounded-md transition-all duration-200 shadow-sm ${users.examStatus === "-" ? "bg-green-500" : "bg-red-500"}`}
+                >
+                  {users.examStatus === "-" ? (
+                    <>
+                      <Check className="w-3.5 h-3.5" />
+                      <span>Berhasil Direset</span>
+                    </>
+                  ) : (
+                    <>
+                      <RefreshCcw className="w-3.5 h-3.5" />
+                      <span>Reset Progres</span>
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
 
             {/* Buttons */}

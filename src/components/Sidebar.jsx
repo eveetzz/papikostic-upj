@@ -59,30 +59,6 @@ export const Sidebar = memo(
             })}
           </div>
         </div>
-        {/* <div className="p-4 grid grid-cols-4 gap-3 overflow-y-auto h-[calc(100%-70px)]">
-          {questions.map((item, idx) => {
-            const isSelected = currrentIndex === idx;
-            const isAnswered = !!answers[item.number];
-
-            return (
-              <button
-                key={item.number}
-                className={`border rounded-md py-2 text-sm font-semibold transition ${
-                  isSelected
-                    ? "bg-[#1A5A9A] text-white"
-                    : isAnswered
-                    ? "bg-green-500 text-white"
-                    : "bg-white hover:bg-blue-50"
-                }`}
-                onClick={() => {
-                  onJumpToIndex(idx);
-                }}
-              >
-                {item.number}
-              </button>
-            );
-          })}
-        </div> */}
       </>
     );
   },

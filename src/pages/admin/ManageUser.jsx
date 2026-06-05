@@ -17,6 +17,7 @@ import {
   deleteUser,
   editUser,
   getUsers,
+  resetStatusUser,
 } from "../../services/manageUser";
 import { EditUser } from "../../components/admin/EditUser";
 import { DeleteUser } from "../../components/admin/deleteUser";
@@ -104,6 +105,50 @@ export const ManageUser = () => {
         text: "Gagal mengupdate user: " + result.error,
         icon: "error",
         confirmButtonColor: "#e53e3e",
+      });
+    }
+  };
+
+  const handleResetUser = async () => {
+    // 1. Konfirmasi Awal
+    const resultConfirm = await Swal.fire({
+      title: "Hapus Progres Tes?",
+      text: `Seluruh hasil tes ${selectedUser.displayName || "user"} akan dihapus permanen.`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, Reset",
+      cancelButtonText: "Batal",
+      confirmButtonColor: "#d33", // Warna merah standard bawaan Swal
+      cancelButtonColor: "#3085d6",
+    });
+
+    if (!resultConfirm.isConfirmed) return;
+
+    try {
+      // 2. Eksekusi API
+      const result = await resetStatusUser(selectedUser.id);
+
+      // 3. Status Akhir
+      if (result.success) {
+        Swal.fire({
+          title: "Berhasil",
+          text: "Progres tes telah diatur ulang.",
+          icon: "success",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      } else {
+        Swal.fire({
+          title: "Gagal",
+          text: result.message || "Gagal mereset data.",
+          icon: "error",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: "Terjadi kesalahan sistem/jaringan.",
+        icon: "error",
       });
     }
   };
@@ -514,6 +559,7 @@ export const ManageUser = () => {
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
           onSave={handleEditUser}
+          handleResetUser={handleResetUser}
         />
         {selectedUser && (
           <DeleteUser

@@ -11,6 +11,8 @@ import {
   query,
   orderBy,
   onSnapshot,
+  writeBatch,
+  where,
 } from "firebase/firestore";
 
 export const getUsers = (callback) => {
@@ -118,5 +120,37 @@ export const updateStatusReview = async (uid, newStatus) => {
     return { success: true };
   } catch (error) {
     return { success: false, error: error.message };
+  }
+};
+
+export const resetStatusUser = async (uid) => {
+  try {
+    // 1. Inisialisasi batch baru
+    const batch = writeBatch(db);
+
+    // 2. Daftarkan operasi Update ke dalam batch
+    const userRef = doc(db, "users", uid);
+    batch.update(userRef, {
+      examStatus: "-",
+      emailSentAt: null,
+    });
+
+    // 2. CARI dokumen di 'user_results' yang field 'uid'-nya cocok
+    const resultsRef = collection(db, "user_results");
+    const q = query(resultsRef, where("uid", "==", uid));
+    const querySnapshot = await getDocs(q);
+
+    // 3. Masukkan semua dokumen yang ditemukan ke dalam batch untuk dihapus
+    querySnapshot.forEach((document) => {
+      batch.delete(document.ref); // Menggunakan document.ref langsung jadi pasti akurat
+    });
+
+    // 4. Eksekusi semua operasi sekaligus secara atomik
+    await batch.commit();
+
+    return { success: true };
+  } catch (error) {
+    console.error("Gagal reset user:", error); // Bagus untuk debugging di console
+    return { success: false, message: error.message }; // Menggunakan 'message' agar cocok dengan alert sebelumnya
   }
 };
