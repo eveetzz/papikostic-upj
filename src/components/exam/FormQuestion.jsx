@@ -79,7 +79,7 @@ export const FormQuestion = memo(
           {/* HEADER */}
           <div className="w-full bg-[#1A5A9A] rounded-b-2xl flex justify-center py-[130px]">
             <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold mt-[-90px]">
-              TEST PSIKOTES
+              TES PAPI KOSTICK
             </h1>
           </div>
 

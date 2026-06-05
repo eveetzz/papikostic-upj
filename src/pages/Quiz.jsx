@@ -252,7 +252,7 @@ export const Quiz = () => {
     }
   };
 
-  // ✅ Sync handleSubmit ke ref setiap render agar timer selalu pakai versi terbaru
+  // Sync handleSubmit ke ref setiap render agar timer selalu pakai versi terbaru
   handleSubmitRef.current = handleSubmit;
 
   const handleAnswer = useCallback((questionId, choice) => {
