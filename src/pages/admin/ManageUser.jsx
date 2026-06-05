@@ -202,14 +202,14 @@ export const ManageUser = () => {
 
     const confirmSend = await Swal.fire({
       title: "Kirim Email?",
-      text: `Anda akan mengirimkan email token ujian ke ${selectedUsers.length} pengguna terpilih.`,
+      text: `Anda akan mengirimkan email ujian ke ${selectedUsers.length} pengguna terpilih.`,
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#f59e0b",
       cancelButtonColor: "#6b7280",
       confirmButtonText: "Ya, Kirim!",
-      cancelButtonText: "Batal"
-      });
+      cancelButtonText: "Batal",
+    });
 
     if (!confirmSend) return;
 
@@ -219,7 +219,7 @@ export const ManageUser = () => {
       if (result.success) {
         Swal.fire({
           title: "Email Terkirim!",
-          text: `Email berhasil dikirim ke ${result.sentCount} pengguna.`,
+          text: `Email berhasil dikirim ke ${selectedUsers.length} pengguna.`,
           icon: "success",
           confirmButtonColor: "#2563eb",
         });
@@ -452,7 +452,7 @@ export const ManageUser = () => {
                                     : "bg-slate-50 text-slate-600 border-slate-200"
                             }`}
                           >
-                            {user.examStatus || "not_started"}
+                            {user.examStatus}
                           </span>
                         </td>
                         <td className="px-6 py-4 text-sm">
