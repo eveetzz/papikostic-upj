@@ -31,7 +31,7 @@ export const ResultScreen = ({ userData, onRestart }) => {
           </div>
 
           <p className="text-gray-800 font-semibold text-lg mb-1">
-            Kamu Telah Menyelesaikan Tes
+            Terima Kasih Telah Mengerjakan Tes
           </p>
 
           <p className="text-[13px] sm:text-sm text-gray-600 mb-8 leading-relaxed">
