@@ -49,7 +49,7 @@ export const Quiz = () => {
   const [extraDeadline, setExtraDeadline] = useState(null);
   const [duration, setDuration] = useState(null);
 
-  // ✅ Ref untuk menghindari stale closure di dalam interval
+  // Ref untuk menghindari stale closure di dalam interval
   const answersRef = useRef(answers);
   const questionsRef = useRef(questions);
   const scoringRulesRef = useRef(scoringRules);
@@ -58,7 +58,7 @@ export const Quiz = () => {
   const startTimeRef = useRef(startTime);
   const handleSubmitRef = useRef(null);
 
-  // ✅ Sync semua ref setiap kali state terkait berubah
+  // Sync semua ref setiap kali state terkait berubah
   useEffect(() => { answersRef.current = answers; }, [answers]);
   useEffect(() => { questionsRef.current = questions; }, [questions]);
   useEffect(() => { scoringRulesRef.current = scoringRules; }, [scoringRules]);
@@ -116,9 +116,7 @@ export const Quiz = () => {
     }
   }, [answers]);
 
-// =========================================================================
-  // 🎯 1. TIMER UTAMA (Hanya butuh SATU blok ini saja, duplikatnya dibuang)
-  // =========================================================================
+
   useEffect(() => {
     if (!actualDeadline || isExtraTime || questions.length === 0) return;
 
@@ -135,7 +133,7 @@ export const Quiz = () => {
         } else {
           Swal.fire({
             title: "Waktu Habis!",
-            text: "Waktu utama telah habis. Apakah Anda ingin menggunakan waktu tambahan 5 menit untuk menyelesaikan jawaban yang tersisa?",
+            text: "Waktu utama telah habis. Gunakan waktu tambahan 5 menit untuk menyelesaikan jawaban yang tersisa.",
             icon: "warning",
             confirmButtonText: "Mengerti & Lanjutkan",
             confirmButtonColor: "#3085d6",
@@ -179,7 +177,7 @@ export const Quiz = () => {
     }, 1000);
 
     return () => clearInterval(checkExtraTime);
-  }, [extraDeadline]); // ✅ Pastikan mendengarkan perubahan jumlah soal
+  }, [extraDeadline]); // Pastikan mendengarkan perubahan jumlah soal
 
   const handleSubmit = async (options = {}) => {
     // Guard: jika options adalah event object (dari form submit), reset ke {}
